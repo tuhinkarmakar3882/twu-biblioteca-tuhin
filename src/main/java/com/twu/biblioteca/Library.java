@@ -21,7 +21,7 @@ public class Library {
 	}
 
 	private List<Book> initializeWithBooks() {
-		Book firstBook = new Book("A Good Book");
+		Book firstBook = new Book("Harry Potter");
 		return Collections.singletonList(firstBook);
 	}
 

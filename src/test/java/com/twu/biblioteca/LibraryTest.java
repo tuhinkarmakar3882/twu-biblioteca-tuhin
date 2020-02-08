@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 public class LibraryTest {
 	@Test
 	void testShouldReturnTheLibraryBooks() {
-		List<Book> expectedBooks = new ArrayList<>(Collections.singletonList(new Book("A Good Book")));
+		List<Book> expectedBooks = new ArrayList<>(Collections.singletonList(new Book("Harry Potter")));
 
 		Library library = new Library();
 
@@ -28,6 +28,6 @@ public class LibraryTest {
 
 		library.showBookDetails();
 
-		verify(mockPrintStream, times(1)).println("A Good Book");
+		verify(mockPrintStream, times(1)).println("Harry Potter");
 	}
 }
