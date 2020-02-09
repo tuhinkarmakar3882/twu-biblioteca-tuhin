@@ -71,8 +71,6 @@ public class LibrarianTest {
 		library.showDetailsOfBooks();
 
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
-
 	}
-
 
 }

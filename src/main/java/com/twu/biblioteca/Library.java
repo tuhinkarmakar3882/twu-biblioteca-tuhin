@@ -9,8 +9,8 @@ public class Library {
 	Librarian librarian;
 
 	public Library(Librarian librarian) {
-		this.bookList = initializeWithBooks();
 		this.librarian = librarian;
+		this.bookList = initializeWithBooks();
 	}
 
 	public List<Book> getBooks() {
@@ -41,7 +41,9 @@ public class Library {
 		Book bookToBeReturned = getUserQueriedBook();
 		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
 			librarian.returnBook(bookToBeReturned);
+			System.out.println("Thank you for returning the book");
 		}
+
 	}
 
 	private List<Book> initializeWithBooks() {
