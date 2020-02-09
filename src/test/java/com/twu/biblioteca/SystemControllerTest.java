@@ -17,7 +17,7 @@ class SystemControllerTest {
 	void setup() {
 		library = mock(Library.class);
 		menu = mock(Menu.class);
-		systemController = new SystemController(library, menu);
+		systemController = new SystemController(menu, library);
 	}
 
 	@Test

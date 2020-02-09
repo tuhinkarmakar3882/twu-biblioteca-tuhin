@@ -6,7 +6,7 @@ public class SystemController {
 	private Library library;
 	private Menu menu;
 
-	SystemController(Library library, Menu menu) {
+	SystemController(Menu menu, Library library) {
 		this.library = library;
 		this.menu = menu;
 	}
@@ -22,11 +22,7 @@ public class SystemController {
 
 	public void serveUserIntent() {
 		int option = acceptInput();
-		switch (option) {
-			case 1:
-				library.showBookDetails();
-				break;
-		}
+		if (option == 1) library.showBookDetails();
 	}
 
 }

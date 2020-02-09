@@ -6,7 +6,8 @@ public class BibliotecaApp {
 		WelcomeScreen welcomeScreen = new WelcomeScreen("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
 		welcomeScreen.showMessage();
 
-		Library library = new Library();
-		library.showBookDetails();
+		SystemController systemController = new SystemController(new Menu(), new Library());
+		systemController.displayMenu();
+		systemController.serveUserIntent();
 	}
 }
