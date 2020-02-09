@@ -22,7 +22,12 @@ public class SystemController {
 
 	public void serveUserIntent() {
 		int option = acceptInput();
-		if (option == 1) library.showBookDetails();
+
+		if (option == 1) {
+			library.showBookDetails();
+		} else {
+			System.out.println("Please select a valid option!");
+		}
 	}
 
 }
