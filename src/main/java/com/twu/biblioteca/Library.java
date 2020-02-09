@@ -15,15 +15,15 @@ public class Library {
 	}
 
 	public void showBookDetails() {
+		System.out.println("Book Name" + "\t\t" + "Author Name" + "\t\t" + "Publication Year");
 		for (Book book : bookList) {
 			book.printDetails();
 		}
 	}
 
 	private List<Book> initializeWithBooks() {
-		Book firstBook = new Book("Harry Potter");
+		Book firstBook = new Book("Harry Potter", "J K Rowling", 2012);
 		return Collections.singletonList(firstBook);
 	}
-
 
 }

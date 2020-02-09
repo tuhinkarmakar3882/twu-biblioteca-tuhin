@@ -10,19 +10,19 @@ import static org.mockito.Mockito.*;
 class BookTest {
 	@Test
 	void testShouldCompareTwoBooks() {
-		Book book = new Book("Harry Potter");
+		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
-		assertEquals(new Book("Harry Potter"), book);
+		assertEquals(new Book("Harry Potter", "J K Rowling", 2012), book);
 	}
 
 	@Test
 	void testShouldPrintTheBookDetails() {
-		Book book = new Book("Harry Potter");
+		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 
 		book.printDetails();
 
-		verify(mockPrintStream, times(1)).println("Harry Potter");
+		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
 	}
 }

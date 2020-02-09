@@ -27,7 +27,7 @@ class BibliotecaAppTest {
 
 	@Test
 	void testShouldPrintTheBookDetailsAfterAWelcomeMessageWheneverTheApplicationStarts() {
-		String expectedBookDetails = "Harry Potter";
+		String expectedBookDetails = "Harry Potter\tJ K Rowling\t\t2012";
 
 		BibliotecaApp.main(null);
 
