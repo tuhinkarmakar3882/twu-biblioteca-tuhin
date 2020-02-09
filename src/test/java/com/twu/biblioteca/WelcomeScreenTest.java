@@ -18,7 +18,7 @@ class WelcomeScreenTest {
 	}
 
 	@Test
-	public void testShouldPrintHelloWorldToConsole() throws Exception {
+	public void testShouldPrintHelloWorldToConsole() {
 		WelcomeScreen welcomeScreen = new WelcomeScreen("hello");
 
 		welcomeScreen.showMessage();
@@ -27,7 +27,7 @@ class WelcomeScreenTest {
 	}
 
 	@Test
-	public void testShouldPrintTheGivenMessageToConsole() throws Exception {
+	public void testShouldPrintTheGivenMessageToConsole() {
 		String givenWelcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
 		WelcomeScreen welcomeScreen = new WelcomeScreen(givenWelcomeMessage);
 
