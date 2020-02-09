@@ -42,8 +42,9 @@ public class Library {
 		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
 			librarian.returnBook(bookToBeReturned);
 			System.out.println("Thank you for returning the book");
+			return;
 		}
-
+		System.out.println("That is not a valid book to return.");
 	}
 
 	private List<Book> initializeWithBooks() {
