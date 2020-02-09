@@ -6,7 +6,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class LibrarianTest {
 
@@ -41,5 +41,20 @@ public class LibrarianTest {
 		library.showDetailsOfBooks();
 
 		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
+	}
+
+	@Test
+	void testShouldNotShowAnAlreadyCheckedOutBookInAvailableBookList() {
+		Librarian librarian = new Librarian();
+		Library library = new Library(librarian);
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		Book bookToBeCheckedOut = library.getBooks().get(0);
+
+		librarian.checkOutBook(bookToBeCheckedOut);
+		library.showDetailsOfBooks();
+
+		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
+
 	}
 }

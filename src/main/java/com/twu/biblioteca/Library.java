@@ -21,7 +21,9 @@ public class Library {
 		System.out.println("[+] Listing Down All The Library Books :-");
 		System.out.println("Book Name" + "\t\t" + "Author Name" + "\t\t" + "Publication Year");
 		for (Book book : bookList) {
-			book.printDetails();
+			if (librarian.hasAvailableForCheckOut(book)) {
+				book.printDetails();
+			}
 		}
 	}
 
