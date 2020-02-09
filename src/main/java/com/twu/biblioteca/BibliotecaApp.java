@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
+
 public class BibliotecaApp {
 
 	public static void main(String[] args) {
@@ -8,6 +10,10 @@ public class BibliotecaApp {
 
 		SystemController systemController = new SystemController(new Menu(), new Library());
 		systemController.displayMenu();
-		systemController.serveUserIntent();
+		try {
+			systemController.serveUserIntent();
+		} catch (ExitFromApplicationException exitRequest) {
+			System.exit(0);
+		}
 	}
 }

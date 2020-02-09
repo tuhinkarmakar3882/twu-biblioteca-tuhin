@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
+
 import java.util.Scanner;
 
 public class SystemController {
@@ -20,14 +22,17 @@ public class SystemController {
 		return scanner.nextInt();
 	}
 
-	public void serveUserIntent() {
+	public void serveUserIntent() throws ExitFromApplicationException {
 		int option = acceptInput();
 
-		if (option == 1) {
-			library.showBookDetails();
-		} else {
-			System.out.println("Please select a valid option!");
+		switch (option) {
+			case 1:
+				library.showBookDetails();
+				break;
+			case 2:
+				throw new ExitFromApplicationException();    // Eventually will be replaced by	->	System.exit(0);
+			default:
+				System.out.println("Please select a valid option!");
 		}
 	}
-
 }
