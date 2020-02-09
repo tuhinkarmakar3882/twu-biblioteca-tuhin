@@ -17,27 +17,27 @@ public class SystemController {
 		menu.showOptions();
 	}
 
-	private int acceptInput() {
+	private String acceptInput() {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
+		return scanner.nextLine();
 	}
 
 	public void serveUserIntent() throws ExitFromApplicationException {
-		int option = acceptInput();
+		String option = acceptInput();
 
 		switch (option) {
-			case 0:
-				throw new ExitFromApplicationException();    // Eventually will be replaced by	->	System.exit(0);
+			case "0":
+				throw new ExitFromApplicationException();    // Eventually will be replaced by->	System.exit(0);
 
-			case 1:
+			case "1":
 				library.showDetailsOfBooks();
 				break;
 
-			case 2:
+			case "2":
 				library.checkOutRequest();
 				break;
 
-			case 3:
+			case "3":
 				library.returnBookRequest();
 				break;
 
