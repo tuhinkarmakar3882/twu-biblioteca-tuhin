@@ -9,14 +9,14 @@ import static org.mockito.Mockito.*;
 
 class BookTest {
 	@Test
-	void testShouldCompareTwoBooks() {
+	public void testShouldCompareTwoBooks() {
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
 		assertEquals(new Book("Harry Potter", "J K Rowling", 2012), book);
 	}
 
 	@Test
-	void testShouldPrintTheBookDetails() {
+	public void testShouldPrintTheBookDetails() {
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);

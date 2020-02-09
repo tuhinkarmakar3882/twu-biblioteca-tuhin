@@ -17,7 +17,7 @@ class BibliotecaAppTest {
 	}
 
 	@Test
-	void testShouldPrintAWelcomeMessageWheneverTheApplicationStarts() {
+	public void testShouldPrintAWelcomeMessageWheneverTheApplicationStarts() {
 		String expectedWelcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
 
 		BibliotecaApp.main(null);
@@ -26,7 +26,7 @@ class BibliotecaAppTest {
 	}
 
 	@Test
-	void testShouldPrintTheBookDetailsAfterAWelcomeMessageWheneverTheApplicationStarts() {
+	public void testShouldPrintTheBookDetailsAfterAWelcomeMessageWheneverTheApplicationStarts() {
 		String expectedBookDetails = "Harry Potter\tJ K Rowling\t\t2012";
 
 		BibliotecaApp.main(null);

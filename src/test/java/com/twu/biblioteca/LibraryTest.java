@@ -10,9 +10,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class LibraryTest {
+class LibraryTest {
 	@Test
-	void testShouldReturnTheLibraryBooks() {
+	public void testShouldReturnTheLibraryBooks() {
 		List<Book> expectedBooks = new ArrayList<>(Collections.singletonList(new Book("Harry Potter", "J K Rowling", 2012)));
 
 		Library library = new Library();
@@ -21,7 +21,7 @@ public class LibraryTest {
 	}
 
 	@Test
-	void testShouldPrintDetailsOfTheLibraryBooks() {
+	public void testShouldPrintDetailsOfTheLibraryBooks() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Library library = new Library();
