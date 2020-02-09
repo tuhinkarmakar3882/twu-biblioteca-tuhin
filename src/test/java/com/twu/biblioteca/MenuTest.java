@@ -19,7 +19,7 @@ class MenuTest {
 	@Test
 	public void testShouldCreateAMenuAndDisplayItsOptions() {
 		Menu menu = new Menu();
-		String expectedMenuOptions = "List of book";
+		String expectedMenuOptions = "1 : List of book";
 
 		menu.showOptions();
 

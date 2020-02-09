@@ -1,10 +1,11 @@
 package com.twu.biblioteca;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
 
-	HashSet<String> menuList = new HashSet<>();
+	List<String> menuList = new ArrayList<>();
 
 	public Menu() {
 		initializeWithDefaultEntries();
@@ -12,11 +13,12 @@ public class Menu {
 
 	private void initializeWithDefaultEntries() {
 		menuList.add("List of book");
+//		menuList.add("Exit the Application");
 	}
 
 	public void showOptions() {
-		for (String menuItem : menuList) {
-			System.out.println(menuItem);
+		for (int itemNumber = 1; itemNumber <= menuList.size(); itemNumber++) {
+			System.out.println(itemNumber + " : " + menuList.get(itemNumber - 1));
 		}
 	}
 }
