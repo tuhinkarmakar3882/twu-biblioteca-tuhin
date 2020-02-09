@@ -29,10 +29,12 @@ public class Library {
 
 	public void checkOutRequest() {
 		Book queriedBook = getUserQueriedBook();
-		if (librarian.hasAvailableForCheckOut(queriedBook)) {
+		if (librarian.hasAvailableForCheckOut(queriedBook) && bookList.contains(queriedBook)) {
 			librarian.checkOutBook(queriedBook);
 			System.out.println("Thank you! Enjoy the book");
+			return;
 		}
+		System.out.println("Sorry, that book is not available");
 	}
 
 	private List<Book> initializeWithBooks() {

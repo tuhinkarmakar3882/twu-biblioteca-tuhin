@@ -56,4 +56,22 @@ class LibraryTest {
 		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
 		verify(mockPrintStream, times(1)).println("Learn Python\tGeeks4Geeks\t\t2019");
 	}
+
+	@Test
+	public void testShouldNotifyAfterFailedCheckOutIfTheSpellingIsWrong() {
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		Library library = new Library(new Librarian());
+
+
+		String bookName = "HOrry PottAr";
+		String authorName = "J K Rowling";
+		String publicationYear = "2012";
+		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
+		System.setIn(testInput);
+		library.checkOutRequest();
+
+		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
+	}
+
 }
