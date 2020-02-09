@@ -8,7 +8,7 @@ public class BibliotecaApp {
 		WelcomeScreen welcomeScreen = new WelcomeScreen("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
 		welcomeScreen.showMessage();
 
-		SystemController systemController = new SystemController(new Menu(), new Library());
+		SystemController systemController = new SystemController(new Menu(), new Library(new Librarian()));
 		systemController.displayMenu();
 		try {
 			systemController.serveUserIntent();

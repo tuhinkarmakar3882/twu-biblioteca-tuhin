@@ -7,7 +7,6 @@ public class Book {
 	private final String author;
 	private final int publicationYear;
 
-
 	public Book(String title, String author, int publicationYear) {
 		this.title = title;
 		this.author = author;
@@ -23,11 +22,13 @@ public class Book {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Book book = (Book) o;
-		return Objects.equals(title, book.title);
+		return publicationYear == book.publicationYear &&
+				title.equals(book.title) &&
+				author.equals(book.author);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(title);
+		return Objects.hash(title, author, publicationYear);
 	}
 }

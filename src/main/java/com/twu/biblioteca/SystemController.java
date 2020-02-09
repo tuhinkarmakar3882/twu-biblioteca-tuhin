@@ -27,10 +27,16 @@ public class SystemController {
 
 		switch (option) {
 			case 1:
-				library.showBookDetails();
+				library.showDetailsOfBooks();
 				break;
+
 			case 2:
+				library.checkOutRequest();
+				break;
+
+			case 3:
 				throw new ExitFromApplicationException();    // Eventually will be replaced by	->	System.exit(0);
+
 			default:
 				System.out.println("Please select a valid option!");
 		}

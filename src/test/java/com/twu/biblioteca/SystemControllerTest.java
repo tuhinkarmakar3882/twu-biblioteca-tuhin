@@ -32,7 +32,7 @@ class SystemControllerTest {
 
 		systemController.serveUserIntent();
 
-		verify(library, times(1)).showBookDetails();
+		verify(library, times(1)).showDetailsOfBooks();
 	}
 
 	@Test
@@ -43,11 +43,12 @@ class SystemControllerTest {
 		String inputChoice = "-1";        //Invalid Input
 		InputStream in = new ByteArrayInputStream(inputChoice.getBytes());
 		System.setIn(in);
+
 		systemController.displayMenu();
 
 		systemController.serveUserIntent();
 
-		verify(library, times(0)).showBookDetails();
+		verify(library, times(0)).showDetailsOfBooks();
 		verify(mockPrintStream, times(1)).println(expectedNotificationMessage);
 	}
 
@@ -55,11 +56,26 @@ class SystemControllerTest {
 	public void testShouldTerminateIfExitOptionIsChosen() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		String inputChoice = "2";        //Invalid Input
+		String inputChoice = "3";
 		InputStream in = new ByteArrayInputStream(inputChoice.getBytes());
 		System.setIn(in);
+
 		systemController.displayMenu();
 
 		assertThrows(ExitFromApplicationException.class, () -> systemController.serveUserIntent());
+	}
+
+	@Test
+	public void testShouldRaiseACheckOutRequest() throws ExitFromApplicationException {
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		String inputChoice = "2";
+		InputStream in = new ByteArrayInputStream(inputChoice.getBytes());
+		System.setIn(in);
+
+		systemController.displayMenu();
+		systemController.serveUserIntent();
+
+		verify(library, times(1)).checkOutRequest();
 	}
 }

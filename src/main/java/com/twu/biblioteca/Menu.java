@@ -13,6 +13,7 @@ public class Menu {
 
 	private void initializeWithDefaultEntries() {
 		menuList.add("List of book");
+		menuList.add("Check-out a Book");
 		menuList.add("Exit the Application");
 	}
 

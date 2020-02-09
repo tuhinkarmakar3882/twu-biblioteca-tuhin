@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,9 +13,11 @@ import static org.mockito.Mockito.*;
 class LibraryTest {
 	@Test
 	public void testShouldReturnTheLibraryBooks() {
-		List<Book> expectedBooks = new ArrayList<>(Collections.singletonList(new Book("Harry Potter", "J K Rowling", 2012)));
+		Book firstBook = new Book("Harry Potter", "J K Rowling", 2012);
+		Book secondBook = new Book("Learn Python", "Geeks4Geeks", 2019);
+		List<Book> expectedBooks = new ArrayList<>(Arrays.asList(firstBook, secondBook));
 
-		Library library = new Library();
+		Library library = new Library(new Librarian());
 
 		assertEquals(expectedBooks, library.getBooks());
 	}
@@ -24,10 +26,12 @@ class LibraryTest {
 	public void testShouldPrintDetailsOfTheLibraryBooks() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library();
+		Library library = new Library(new Librarian());
 
-		library.showBookDetails();
+		library.showDetailsOfBooks();
 
+		verify(mockPrintStream, times(1)).println("[+] Listing Down All The Library Books :-");
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
+		verify(mockPrintStream, times(1)).println("Learn Python\tGeeks4Geeks\t\t2019");
 	}
 }
