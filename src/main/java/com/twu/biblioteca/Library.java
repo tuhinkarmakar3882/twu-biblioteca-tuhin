@@ -31,20 +31,20 @@ public class Library {
 		Book queriedBook = getUserQueriedBook();
 		if (librarian.hasAvailableForCheckOut(queriedBook) && bookList.contains(queriedBook)) {
 			librarian.checkOutBook(queriedBook);
-			System.out.println("Thank you! Enjoy the book");
+			Notifications.CheckOutSuccess.showNotification();
 			return;
 		}
-		System.out.println("Sorry, that book is not available");
+		Notifications.CheckOutFailure.showNotification();
 	}
 
 	public void returnBookRequest() {
 		Book bookToBeReturned = getUserQueriedBook();
 		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
 			librarian.returnBook(bookToBeReturned);
-			System.out.println("Thank you for returning the book");
+			Notifications.ReturnSuccess.showNotification();
 			return;
 		}
-		System.out.println("That is not a valid book to return.");
+		Notifications.ReturnFailure.showNotification();
 	}
 
 	private List<Book> initializeWithBooks() {
