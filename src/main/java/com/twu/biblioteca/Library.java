@@ -5,16 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Library {
-	private final List<Book> bookList;
+	private List<Book> bookList;
 	private Librarian librarian;
 
 	public Library(Librarian librarian) {
 		this.librarian = librarian;
 		this.bookList = initializeWithBooks();
-	}
-
-	public List<Book> getBooks() {
-		return bookList;
 	}
 
 	public void showDetailsOfBooks() {

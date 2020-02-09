@@ -5,24 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class LibraryTest {
-	@Test
-	public void testShouldReturnTheLibraryBooks() {
-		Book firstBook = new Book("Harry Potter", "J K Rowling", 2012);
-		Book secondBook = new Book("Learn Python", "Geeks4Geeks", 2019);
-		List<Book> expectedBooks = new ArrayList<>(Arrays.asList(firstBook, secondBook));
-
-		Library library = new Library(new Librarian());
-
-		assertEquals(expectedBooks, library.getBooks());
-	}
 
 	@Test
 	public void testShouldPrintDetailsOfTheLibraryBooks() {

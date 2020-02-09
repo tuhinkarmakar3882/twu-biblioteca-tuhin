@@ -35,7 +35,7 @@ public class LibrarianTest {
 		Library library = new Library(librarian);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Book bookToBeCheckedOut = library.getBooks().get(0);
+		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
 		librarian.checkOutBook(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
@@ -49,7 +49,7 @@ public class LibrarianTest {
 		Library library = new Library(librarian);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Book bookToBeCheckedOut = library.getBooks().get(0);
+		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
 		librarian.checkOutBook(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
@@ -64,7 +64,7 @@ public class LibrarianTest {
 		Library library = new Library(librarian);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Book bookToBeCheckedOut = library.getBooks().get(0);
+		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		librarian.checkOutBook(bookToBeCheckedOut);
 
 		librarian.returnBook(bookToBeCheckedOut);
