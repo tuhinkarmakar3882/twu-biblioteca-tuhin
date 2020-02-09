@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Library {
 	private final List<Book> bookList;
-	Librarian librarian;
+	private Librarian librarian;
 
 	public Library(Librarian librarian) {
 		this.librarian = librarian;
