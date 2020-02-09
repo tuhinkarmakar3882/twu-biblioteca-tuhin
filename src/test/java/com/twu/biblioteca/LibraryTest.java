@@ -42,11 +42,10 @@ class LibraryTest {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Library library = new Library(new Librarian());
-
-
 		String bookName = "Harry Potter";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
+
 		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
 		System.setIn(testInput);
 		library.checkOutRequest();
@@ -58,13 +57,32 @@ class LibraryTest {
 	}
 
 	@Test
+	public void testShouldNotifyAfterFailedCheckOutIfTheBookIsUnavailable() {
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		Library library = new Library(new Librarian());
+		String bookName = "Harry Potter";
+		String authorName = "J K Rowling";
+		String publicationYear = "2012";
+		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
+		System.setIn(testInput);
+		library.checkOutRequest();
+
+		testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
+		System.setIn(testInput);
+		library.checkOutRequest();
+
+		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
+	}
+
+	@Test
 	public void testShouldNotifyAfterFailedCheckOutIfTheSpellingIsWrong() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Library library = new Library(new Librarian());
 
 
-		String bookName = "HOrry PottAr";
+		String bookName = "HOrrI PittAr";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
 		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
