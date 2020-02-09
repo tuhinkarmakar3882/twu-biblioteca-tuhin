@@ -28,10 +28,10 @@ public class Library {
 	}
 
 	public void checkOutRequest() {
-		showDetailsOfBooks();
 		Book queriedBook = getUserQueriedBook();
 		if (librarian.hasAvailableForCheckOut(queriedBook)) {
 			librarian.checkOutBook(queriedBook);
+			System.out.println("Thank you! Enjoy the book");
 		}
 	}
 
