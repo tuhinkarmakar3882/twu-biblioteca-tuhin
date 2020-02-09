@@ -18,7 +18,6 @@ class MenuTest {
 
 	@Test
 	public void testShouldCreateAMenuAndDisplayItsOptions() {
-
 		Menu menu = new Menu();
 		String expectedWelcomeMessage = "List of book";
 

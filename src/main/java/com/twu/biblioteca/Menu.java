@@ -15,7 +15,6 @@ public class Menu {
 	}
 
 	public void showOptions() {
-		System.out.println("Menu : ");
 		for (String menuItem : menuList) {
 			System.out.println(menuItem);
 		}

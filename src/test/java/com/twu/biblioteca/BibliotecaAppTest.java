@@ -25,12 +25,4 @@ class BibliotecaAppTest {
 		verify(mockPrintStream, times(1)).println(expectedWelcomeMessage);
 	}
 
-	@Test
-	public void testShouldPrintTheBookDetailsAfterAWelcomeMessageWheneverTheApplicationStarts() {
-		String expectedBookDetails = "Harry Potter\tJ K Rowling\t\t2012";
-
-		BibliotecaApp.main(null);
-
-		verify(mockPrintStream, times(1)).println(expectedBookDetails);
-	}
 }
