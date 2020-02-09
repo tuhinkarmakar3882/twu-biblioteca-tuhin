@@ -17,4 +17,7 @@ public class Librarian {
 		return !checkedOutBooks.contains(book);
 	}
 
+	public void returnBook(Book book) {
+		checkedOutBooks.remove(book);
+	}
 }

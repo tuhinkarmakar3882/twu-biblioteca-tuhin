@@ -9,11 +9,13 @@ public class BibliotecaApp {
 		welcomeScreen.showMessage();
 
 		SystemController systemController = new SystemController(new Menu(), new Library(new Librarian()));
-		systemController.displayMenu();
-		try {
-			systemController.serveUserIntent();
-		} catch (ExitFromApplicationException exitRequest) {
-			System.exit(0);
+		while (true) {
+			systemController.displayMenu();
+			try {
+				systemController.serveUserIntent();
+			} catch (ExitFromApplicationException exitRequest) {
+				System.exit(0);
+			}
 		}
 	}
 }

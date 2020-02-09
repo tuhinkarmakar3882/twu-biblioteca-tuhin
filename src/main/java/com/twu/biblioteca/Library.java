@@ -37,6 +37,13 @@ public class Library {
 		System.out.println("Sorry, that book is not available");
 	}
 
+	public void returnBookRequest() {
+		Book bookToBeReturned = getUserQueriedBook();
+		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
+			librarian.returnBook(bookToBeReturned);
+		}
+	}
+
 	private List<Book> initializeWithBooks() {
 		Book firstBook = new Book("Harry Potter", "J K Rowling", 2012);
 		Book secondBook = new Book("Learn Python", "Geeks4Geeks", 2019);
@@ -57,6 +64,4 @@ public class Library {
 		return new Book(bookName, authorName, publicationYear);
 	}
 
-	public void returnBookRequest() {
-	}
 }

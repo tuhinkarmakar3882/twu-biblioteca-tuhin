@@ -57,4 +57,22 @@ public class LibrarianTest {
 		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
 
 	}
+
+	@Test
+	void testShouldBeAbleReturnAValidCheckedOutBook() {
+		Librarian librarian = new Librarian();
+		Library library = new Library(librarian);
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		Book bookToBeCheckedOut = library.getBooks().get(0);
+		librarian.checkOutBook(bookToBeCheckedOut);
+
+		librarian.returnBook(bookToBeCheckedOut);
+		library.showDetailsOfBooks();
+
+		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
+
+	}
+
+
 }
