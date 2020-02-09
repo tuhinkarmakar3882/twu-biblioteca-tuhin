@@ -56,7 +56,7 @@ class SystemControllerTest {
 	public void testShouldTerminateIfExitOptionIsChosen() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		String inputChoice = "3";
+		String inputChoice = "0";
 		InputStream in = new ByteArrayInputStream(inputChoice.getBytes());
 		System.setIn(in);
 

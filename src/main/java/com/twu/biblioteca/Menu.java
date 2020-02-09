@@ -12,14 +12,16 @@ public class Menu {
 	}
 
 	private void initializeWithDefaultEntries() {
+		menuList.add("Exit the Application");
 		menuList.add("List of book");
 		menuList.add("Check-out a Book");
-		menuList.add("Exit the Application");
+		menuList.add("Return a Book");
+
 	}
 
 	public void showOptions() {
-		for (int itemNumber = 1; itemNumber <= menuList.size(); itemNumber++) {
-			System.out.println(itemNumber + " : " + menuList.get(itemNumber - 1));
+		for (int itemNumber = 0; itemNumber < menuList.size(); itemNumber++) {
+			System.out.println(itemNumber + " : " + menuList.get(itemNumber));
 		}
 	}
 }

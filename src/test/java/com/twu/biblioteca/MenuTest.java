@@ -32,12 +32,15 @@ class MenuTest {
 	@Test
 	public void testShouldCreateAMenuAndDisplayItsOptions() {
 		Menu menu = new Menu();
-		List<String> expectedMenuOptions = new ArrayList<>(Arrays.asList("1 : List of book", "2 : Check-out a Book", "3 : Exit the Application"));
+		List<String> expectedMenuOptions =
+				new ArrayList<>(Arrays.asList("1 : List of book", "2 : Check-out a Book", "3 : Return a Book", "0 : Exit the Application"));
 
 		menu.showOptions();
 
 		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(0));
 		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(1));
 		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(2));
+		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(3));
+
 	}
 }

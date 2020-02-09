@@ -26,6 +26,9 @@ public class SystemController {
 		int option = acceptInput();
 
 		switch (option) {
+			case 0:
+				throw new ExitFromApplicationException();    // Eventually will be replaced by	->	System.exit(0);
+
 			case 1:
 				library.showDetailsOfBooks();
 				break;
@@ -35,7 +38,8 @@ public class SystemController {
 				break;
 
 			case 3:
-				throw new ExitFromApplicationException();    // Eventually will be replaced by	->	System.exit(0);
+				library.returnBookRequest();
+				break;
 
 			default:
 				System.out.println("Please select a valid option!");
