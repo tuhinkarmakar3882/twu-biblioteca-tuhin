@@ -19,10 +19,10 @@ class MenuTest {
 	@Test
 	public void testShouldCreateAMenuAndDisplayItsOptions() {
 		Menu menu = new Menu();
-		String expectedWelcomeMessage = "List of book";
+		String expectedMenuOptions = "List of book";
 
 		menu.showOptions();
 
-		verify(mockPrintStream, times(1)).println(expectedWelcomeMessage);
+		verify(mockPrintStream, times(1)).println(expectedMenuOptions);
 	}
 }
