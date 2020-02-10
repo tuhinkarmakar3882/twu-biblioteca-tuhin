@@ -1,23 +1,23 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Library {
-	private List<Book> bookList;
-	private Librarian librarian;
+	private final ArrayList<Book> availableBookList;
+	private final Librarian librarian;
 
 	public Library(Librarian librarian) {
 		this.librarian = librarian;
-		this.bookList = initializeWithBooks();
+		this.availableBookList = initializeWithBooks();
 	}
 
 	public void showDetailsOfBooks() {
 		System.out.println("[+] Listing Down All The Library Books :-");
 		System.out.println("Book Name" + "\t\t" + "Author Name" + "\t\t" + "Publication Year");
-		for (Book book : bookList) {
-			if (librarian.hasAvailableForCheckOut(book)) {
+		for (Book book : availableBookList) {
+			if (librarian.hasNotAvailableForReturn(book)) {
 				book.printDetails();
 			}
 		}
@@ -25,9 +25,10 @@ public class Library {
 
 	public void checkOutRequest() {
 		Book queriedBook = getUserQueriedBook();
-		if (librarian.hasAvailableForCheckOut(queriedBook) && bookList.contains(queriedBook)) {
-			librarian.checkOutBook(queriedBook);
+		if (availableBookList.contains(queriedBook)) {
+			librarian.acceptCheckOutRequest(queriedBook);
 			Notifications.CheckOutSuccess.showNotification();
+			availableBookList.remove(queriedBook);
 			return;
 		}
 		Notifications.CheckOutFailure.showNotification();
@@ -35,18 +36,19 @@ public class Library {
 
 	public void returnBookRequest() {
 		Book bookToBeReturned = getUserQueriedBook();
-		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
-			librarian.returnBook(bookToBeReturned);
+		if (!librarian.hasNotAvailableForReturn(bookToBeReturned)) {
+			librarian.acceptReturnRequest(bookToBeReturned);
 			Notifications.ReturnSuccess.showNotification();
+			availableBookList.add(bookToBeReturned);
 			return;
 		}
 		Notifications.ReturnFailure.showNotification();
 	}
 
-	private List<Book> initializeWithBooks() {
+	private ArrayList<Book> initializeWithBooks() {
 		Book firstBook = new Book("Harry Potter", "J K Rowling", 2012);
 		Book secondBook = new Book("Learn Python", "Geeks4Geeks", 2019);
-		return Arrays.asList(firstBook, secondBook);
+		return new ArrayList<>(Arrays.asList(firstBook, secondBook));
 	}
 
 	private Book getUserQueriedBook() {

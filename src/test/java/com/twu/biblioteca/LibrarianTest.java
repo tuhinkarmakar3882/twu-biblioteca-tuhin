@@ -16,7 +16,7 @@ public class LibrarianTest {
 
 		Book bookToBeCheckedOut = new Book("Random Book", "Random Author", 2020);
 
-		assertTrue(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
+		assertTrue(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
 	}
 
 	@Test
@@ -24,9 +24,9 @@ public class LibrarianTest {
 		Librarian librarian = new Librarian();
 		Book bookToBeCheckedOut = new Book("Random Book", "Random Author", 2020);
 
-		librarian.checkOutBook(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 
-		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
+		assertFalse(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
 	}
 
 	@Test
@@ -37,10 +37,10 @@ public class LibrarianTest {
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
-		librarian.checkOutBook(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
 
-		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
+		assertFalse(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class LibrarianTest {
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
-		librarian.checkOutBook(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
 
 		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
@@ -65,9 +65,9 @@ public class LibrarianTest {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
-		librarian.checkOutBook(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 
-		librarian.returnBook(bookToBeCheckedOut);
+		librarian.acceptReturnRequest(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
 
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
