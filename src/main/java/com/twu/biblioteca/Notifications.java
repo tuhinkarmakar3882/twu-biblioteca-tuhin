@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
+
 public enum Notifications {
 	CheckOutSuccess("Thank you! Enjoy the book"),
 	CheckOutFailure("Sorry, that book is not available"),
@@ -12,7 +14,7 @@ public enum Notifications {
 		this.message = message;
 	}
 
-	public void showNotification() {
-		System.out.println(message);
+	public void showNotification(PrintStream out) {
+		out.println(message);
 	}
 }

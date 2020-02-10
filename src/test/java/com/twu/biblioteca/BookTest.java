@@ -21,7 +21,7 @@ class BookTest {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 
-		book.printDetails();
+		book.printDetails(System.out);
 
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
 	}

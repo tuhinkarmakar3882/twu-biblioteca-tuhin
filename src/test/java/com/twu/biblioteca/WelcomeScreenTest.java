@@ -19,7 +19,7 @@ class WelcomeScreenTest {
 
 	@Test
 	public void testShouldPrintHelloWorldToConsole() {
-		WelcomeScreen welcomeScreen = new WelcomeScreen("hello");
+		WelcomeScreen welcomeScreen = new WelcomeScreen("hello", System.out);
 
 		welcomeScreen.showMessage();
 
@@ -29,7 +29,7 @@ class WelcomeScreenTest {
 	@Test
 	public void testShouldPrintTheGivenMessageToConsole() {
 		String givenWelcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
-		WelcomeScreen welcomeScreen = new WelcomeScreen(givenWelcomeMessage);
+		WelcomeScreen welcomeScreen = new WelcomeScreen(givenWelcomeMessage, System.out);
 
 		welcomeScreen.showMessage();
 

@@ -17,11 +17,6 @@ public class SystemController {
 		menu.showOptions();
 	}
 
-	private String acceptInput() {
-		Scanner scanner = new Scanner(System.in);
-		return scanner.nextLine();
-	}
-
 	public void serveUserIntent() throws ExitFromApplicationException {
 		String option = acceptInput();
 
@@ -44,5 +39,10 @@ public class SystemController {
 			default:
 				System.out.println("Please select a valid option!");
 		}
+	}
+
+	private String acceptInput() {
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextLine();
 	}
 }

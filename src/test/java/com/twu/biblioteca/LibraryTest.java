@@ -14,7 +14,7 @@ class LibraryTest {
 	public void testShouldPrintDetailsOfTheLibraryBooks() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 
 		library.showDetailsOfBooks();
 
@@ -27,7 +27,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterSuccessfulCheckOut() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 		String bookName = "Harry Potter";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
@@ -46,7 +46,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheBookIsUnavailable() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 		String bookName = "Harry Potter";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
@@ -65,7 +65,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheSpellingIsWrong() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 		String bookName = "HOrrI PittAr";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
@@ -81,7 +81,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterSuccessfulReturn() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 		String bookName = "Harry Potter";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";
@@ -100,7 +100,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedBookReturnDueToSpellingError() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian());
+		Library library = new Library(new Librarian(), System.out);
 		String bookName = "HOrrI PittAr";
 		String authorName = "J K Rowling";
 		String publicationYear = "2012";

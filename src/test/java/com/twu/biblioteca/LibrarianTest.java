@@ -32,7 +32,7 @@ public class LibrarianTest {
 	@Test
 	void testShouldMoveABookToCheckedOutBookList() {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian);
+		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
@@ -46,7 +46,7 @@ public class LibrarianTest {
 	@Test
 	void testShouldNotShowAnAlreadyCheckedOutBookInAvailableBookList() {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian);
+		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
@@ -61,7 +61,7 @@ public class LibrarianTest {
 	@Test
 	void testShouldBeAbleReturnAValidCheckedOutBook() {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian);
+		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);

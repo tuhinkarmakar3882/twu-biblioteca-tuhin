@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -7,10 +8,12 @@ import java.util.Scanner;
 public class Library {
 	private final ArrayList<Book> availableBookList;
 	private final Librarian librarian;
+	private PrintStream out;
 
-	public Library(Librarian librarian) {
+	public Library(Librarian librarian, PrintStream out) {
 		this.librarian = librarian;
 		this.availableBookList = initializeWithBooks();
+		this.out = out;
 	}
 
 	public void showDetailsOfBooks() {
@@ -18,7 +21,7 @@ public class Library {
 		System.out.println("Book Name" + "\t\t" + "Author Name" + "\t\t" + "Publication Year");
 		for (Book book : availableBookList) {
 			if (librarian.hasNotAvailableForReturn(book)) {
-				book.printDetails();
+				book.printDetails(System.out);
 			}
 		}
 	}
@@ -27,22 +30,22 @@ public class Library {
 		Book queriedBook = getUserQueriedBook();
 		if (availableBookList.contains(queriedBook)) {
 			librarian.acceptCheckOutRequest(queriedBook);
-			Notifications.CheckOutSuccess.showNotification();
+			Notifications.CheckOutSuccess.showNotification(out);
 			availableBookList.remove(queriedBook);
 			return;
 		}
-		Notifications.CheckOutFailure.showNotification();
+		Notifications.CheckOutFailure.showNotification(out);
 	}
 
 	public void returnBookRequest() {
 		Book bookToBeReturned = getUserQueriedBook();
 		if (!librarian.hasNotAvailableForReturn(bookToBeReturned)) {
 			librarian.acceptReturnRequest(bookToBeReturned);
-			Notifications.ReturnSuccess.showNotification();
+			Notifications.ReturnSuccess.showNotification(out);
 			availableBookList.add(bookToBeReturned);
 			return;
 		}
-		Notifications.ReturnFailure.showNotification();
+		Notifications.ReturnFailure.showNotification(out);
 	}
 
 	private ArrayList<Book> initializeWithBooks() {

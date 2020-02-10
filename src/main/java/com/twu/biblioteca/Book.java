@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import java.io.PrintStream;
 import java.util.Objects;
 
 public class Book {
@@ -13,8 +14,8 @@ public class Book {
 		this.publicationYear = publicationYear;
 	}
 
-	public void printDetails() {
-		System.out.println(title + "\t" + author + "\t\t" + publicationYear);
+	public void printDetails(PrintStream out) {
+		out.println(title + "\t" + author + "\t\t" + publicationYear);
 	}
 
 	@Override
