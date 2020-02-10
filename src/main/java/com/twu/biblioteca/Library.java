@@ -63,9 +63,14 @@ public class Library {
 		System.out.println("\t[+] Author Name : ");
 		String authorName = scanner.nextLine();
 		System.out.println("\t[+] Publication Year : ");
-		int publicationYear = scanner.nextInt();
+		String publicationYearString = scanner.nextLine();
 
-		return new Book(bookName, authorName, publicationYear);
+		try {
+			int publicationYear = Integer.parseInt(publicationYearString);
+			return new Book(bookName, authorName, publicationYear);
+		} catch (NumberFormatException invalidNumber) {
+			return new Book(bookName, authorName, -1);
+		}
 	}
 
 }
