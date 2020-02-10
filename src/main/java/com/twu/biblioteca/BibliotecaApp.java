@@ -8,11 +8,11 @@ public class BibliotecaApp {
 		WelcomeScreen welcomeScreen = new WelcomeScreen("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
 		welcomeScreen.showMessage();
 
-		SystemController systemController = new SystemController(new Menu(), new Library(new Librarian()));
+		SystemController coreSystemController = new SystemController(new Menu(), new Library(new Librarian()));
 		while (true) {
-			systemController.displayMenu();
+			coreSystemController.displayMenu();
 			try {
-				systemController.serveUserIntent();
+				coreSystemController.serveUserIntent();
 			} catch (ExitFromApplicationException exitRequest) {
 				System.exit(0);
 			}
