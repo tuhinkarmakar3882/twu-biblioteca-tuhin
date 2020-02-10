@@ -78,4 +78,18 @@ class SystemControllerTest {
 
 		verify(library, times(1)).checkOutRequest();
 	}
+
+	@Test
+	public void testShouldRaiseAReturnBookRequest() throws ExitFromApplicationException {
+		PrintStream mockPrintStream = mock(PrintStream.class);
+		System.setOut(mockPrintStream);
+		String inputChoice = "3";
+		InputStream in = new ByteArrayInputStream(inputChoice.getBytes());
+		System.setIn(in);
+
+		systemController.displayMenu();
+		systemController.serveUserIntent();
+
+		verify(library, times(1)).returnBookRequest();
+	}
 }
