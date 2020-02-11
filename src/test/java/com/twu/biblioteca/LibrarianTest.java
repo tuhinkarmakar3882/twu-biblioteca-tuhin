@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exceptions.NoBookAvailableException;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
@@ -16,7 +17,7 @@ public class LibrarianTest {
 
 		Book bookToBeCheckedOut = new Book("Random Book", "Random Author", 2020);
 
-		assertTrue(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
+		assertTrue(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
 	}
 
 	@Test
@@ -26,11 +27,11 @@ public class LibrarianTest {
 
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 
-		assertFalse(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
+		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
 	}
 
 	@Test
-	void testShouldMoveABookToCheckedOutBookList() {
+	void testShouldMoveABookToCheckedOutBookList() throws NoBookAvailableException {
 		Librarian librarian = new Librarian();
 		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
@@ -40,11 +41,11 @@ public class LibrarianTest {
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
 
-		assertFalse(librarian.hasNotAvailableForReturn(bookToBeCheckedOut));
+		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
 	}
 
 	@Test
-	void testShouldNotShowAnAlreadyCheckedOutBookInAvailableBookList() {
+	void testShouldNotShowAnAlreadyCheckedOutBookInAvailableBookList() throws NoBookAvailableException {
 		Librarian librarian = new Librarian();
 		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
@@ -59,11 +60,11 @@ public class LibrarianTest {
 	}
 
 	@Test
-	void testShouldBeAbleReturnAValidCheckedOutBook() {
+	void testShouldBeAbleReturnAValidCheckedOutBook() throws NoBookAvailableException {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian, System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
+		Library library = new Library(librarian, mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
 

@@ -2,47 +2,44 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
 
-import java.util.Scanner;
+import java.io.PrintStream;
 
 public class SystemController {
 	private Library library;
 	private Menu menu;
+	private InputScanner inputScanner;
+	private PrintStream outStream;
 
-	SystemController(Menu menu, Library library) {
+
+	SystemController(Menu menu, Library library, PrintStream outStream) {
 		this.library = library;
 		this.menu = menu;
+		this.outStream = outStream;
+		inputScanner = new InputScanner();
 	}
 
 	public void displayMenu() {
 		menu.showOptions();
 	}
 
-	public void serveUserIntent() throws ExitFromApplicationException {
-		String option = acceptInput();
-
-		switch (option) {
-			case "0":
-				throw new ExitFromApplicationException();    // Eventually will be replaced by->	System.exit(0);
-
-			case "1":
-				library.showDetailsOfBooks();
-				break;
-
-			case "2":
-				library.checkOutRequest();
-				break;
-
-			case "3":
-				library.returnBookRequest();
-				break;
-
-			default:
-				System.out.println("Please select a valid option!");
+	public void serveUserRequest() throws ExitFromApplicationException {
+		String option = inputScanner.nextLine();
+		if (menu.isValidOption(option)) {
+			Service requestedService = Service.getRequestedService(option);
+			requestedService.serveIntent(library);
+		} else {
+			Notifications.INVALID_INPUT.showNotificationOn(outStream);
 		}
 	}
 
-	private String acceptInput() {
-		Scanner scanner = new Scanner(System.in);
-		return scanner.nextLine();
+	public void startSession() {
+		while (true) {
+			displayMenu();
+			try {
+				serveUserRequest();
+			} catch (ExitFromApplicationException exitRequest) {
+				System.exit(0);
+			}
+		}
 	}
 }

@@ -1,9 +1,8 @@
 package com.twu.biblioteca;
 
+import com.twu.biblioteca.Exceptions.NoBookAvailableException;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
@@ -11,34 +10,29 @@ import static org.mockito.Mockito.*;
 class LibraryTest {
 
 	@Test
-	public void testShouldPrintDetailsOfTheLibraryBooks() {
+	public void testShouldPrintDetailsOfTheLibraryBooks() throws NoBookAvailableException {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), System.out);
+		Library library = new Library(new Librarian(), mockPrintStream);
 
 		library.showDetailsOfBooks();
 
-		verify(mockPrintStream, times(1)).println("[+] Listing Down All The Library Books :-");
+		verify(mockPrintStream, times(1)).println("\n[+] Listing Down All The Library Books :-");
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
 		verify(mockPrintStream, times(1)).println("Learn Python\tGeeks4Geeks\t\t2019");
 	}
 
 	@Test
-	public void testShouldNotifyAfterSuccessfulCheckOut() {
+	public void testShouldNotifyAfterSuccessfulCheckOut() throws NoBookAvailableException {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), System.out);
-		String bookName = "Harry Potter";
-		String authorName = "J K Rowling";
-		String publicationYear = "2012";
+		Library library = new Library(new Librarian(), mockPrintStream);
+		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
-		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
-		library.checkOutRequest();
+		library.checkOutRequest(book);
 
 		library.showDetailsOfBooks();
 		verify(mockPrintStream, times(1)).println("Thank you! Enjoy the book");
-		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
 		verify(mockPrintStream, times(1)).println("Learn Python\tGeeks4Geeks\t\t2019");
 	}
 
@@ -46,17 +40,11 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheBookIsUnavailable() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), System.out);
-		String bookName = "Harry Potter";
-		String authorName = "J K Rowling";
-		String publicationYear = "2012";
-		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
-		library.checkOutRequest();
+		Library library = new Library(new Librarian(), mockPrintStream);
+		Book book = new Book("Harry Potter", "J K Rowling", 2012);
+		library.checkOutRequest(book);
 
-		testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
-		library.checkOutRequest();
+		library.checkOutRequest(book);
 
 		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
 	}
@@ -65,14 +53,10 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheSpellingIsWrong() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), System.out);
-		String bookName = "HOrrI PittAr";
-		String authorName = "J K Rowling";
-		String publicationYear = "2012";
-		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
+		Library library = new Library(new Librarian(), mockPrintStream);
+		Book book = new Book("HOrrI PittAr", "J K Rowling", 2012);
 
-		library.checkOutRequest();
+		library.checkOutRequest(book);
 
 		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
 	}
@@ -81,17 +65,12 @@ class LibraryTest {
 	public void testShouldNotifyAfterSuccessfulReturn() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), System.out);
-		String bookName = "Harry Potter";
-		String authorName = "J K Rowling";
-		String publicationYear = "2012";
-		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
-		library.checkOutRequest();
-		testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
+		Library library = new Library(new Librarian(), mockPrintStream);
+		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
-		library.returnBookRequest();
+		library.checkOutRequest(book);
+
+		library.returnBookRequest(book);
 
 		verify(mockPrintStream, times(1)).println("Thank you for returning the book");
 	}
@@ -101,16 +80,10 @@ class LibraryTest {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Library library = new Library(new Librarian(), System.out);
-		String bookName = "HOrrI PittAr";
-		String authorName = "J K Rowling";
-		String publicationYear = "2012";
-		InputStream testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
-		library.checkOutRequest();
-		testInput = new ByteArrayInputStream((bookName + "\n" + authorName + "\n" + publicationYear).getBytes());
-		System.setIn(testInput);
 
-		library.returnBookRequest();
+		Book book = new Book("HOrrI PIttAr", "J K Rowling", 2012);
+
+		library.returnBookRequest(book);
 
 		verify(mockPrintStream, times(1)).println("That is not a valid book to return.");
 	}

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class MenuTest {
@@ -42,5 +44,26 @@ class MenuTest {
 		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(2));
 		verify(mockPrintStream, times(1)).println(expectedMenuOptions.get(3));
 
+	}
+
+	@Test
+	void testShouldReturnTrueForValidInputs() {
+		Menu menu = new Menu();
+
+		assertTrue(menu.isValidOption("1"));
+	}
+
+	@Test
+	void testShouldReturnFalseForValidInputs() {
+		Menu menu = new Menu();
+
+		assertFalse(menu.isValidOption("-1"));
+	}
+
+	@Test
+	void testShouldReturnFalseNonIntegerInputs() {
+		Menu menu = new Menu();
+
+		assertFalse(menu.isValidOption("THIS_IS_A_WRONG_INPUT"));
 	}
 }

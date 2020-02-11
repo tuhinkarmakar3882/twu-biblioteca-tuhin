@@ -13,7 +13,7 @@ public class Librarian {
 		checkedOutBooks.add(book);
 	}
 
-	public boolean hasNotAvailableForReturn(Book book) {
+	public boolean hasAvailableForCheckOut(Book book) {
 		return !checkedOutBooks.contains(book);
 	}
 
