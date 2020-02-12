@@ -8,13 +8,15 @@ public class SystemController {
 	private MoviesLibrary moviesLibrary;
 	private Menu menu;
 	private SystemWrapper systemWrapper;
-	private User user;
+	public static CredentialAuthenticator credentialAuthenticator;
+
 
 	SystemController(Menu menu, Library library, MoviesLibrary moviesLibrary, SystemWrapper systemWrapper) {
 		this.library = library;
 		this.menu = menu;
 		this.moviesLibrary = moviesLibrary;
 		this.systemWrapper = systemWrapper;
+		credentialAuthenticator = new CredentialAuthenticator();
 	}
 
 	public void displayMenu() {

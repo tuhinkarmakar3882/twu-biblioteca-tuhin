@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-class CredentialAuthenticationTest {
+class CredentialAuthenticatorTest {
 
 	@Test
 	void testShouldAllowToLoginValidUser() {
@@ -18,7 +18,8 @@ class CredentialAuthenticationTest {
 		ByteArrayInputStream testInput = new ByteArrayInputStream("twu-0001\n1234".getBytes());
 		System.setIn(testInput);
 		SystemWrapper systemWrapper = new SystemWrapper(testInput, printStream);
-		assertDoesNotThrow(() -> CredentialAuthentication.authenticateUserVia(systemWrapper));
+		CredentialAuthenticator credentialAuthenticator = new CredentialAuthenticator();
+		assertDoesNotThrow(() -> credentialAuthenticator.authenticateUserVia(systemWrapper));
 	}
 
 	@Test
@@ -27,6 +28,7 @@ class CredentialAuthenticationTest {
 		ByteArrayInputStream testInput = new ByteArrayInputStream("twu-0001\n12312345678".getBytes());
 		System.setIn(testInput);
 		SystemWrapper systemWrapper = new SystemWrapper(testInput, printStream);
-		assertThrows(UserDoesNotExists.class, () -> CredentialAuthentication.authenticateUserVia(systemWrapper));
+		CredentialAuthenticator credentialAuthenticator = new CredentialAuthenticator();
+		assertThrows(UserDoesNotExists.class, () -> credentialAuthenticator.authenticateUserVia(systemWrapper));
 	}
 }

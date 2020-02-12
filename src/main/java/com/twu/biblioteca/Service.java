@@ -23,7 +23,7 @@ public abstract class Service {
 	public static final Service RAISE_A_CHECKOUT_REQUEST = new Service() {
 		@Override
 		public void serveIntent(Library library, SystemWrapper systemWrapper) throws UserDoesNotExists {
-			User authenticatedUser = CredentialAuthentication.authenticateUserVia(systemWrapper);
+			User authenticatedUser = SystemController.credentialAuthenticator.authenticateUserVia(systemWrapper);
 			Book queriedBook = getUserQueriedBook(systemWrapper);
 			library.checkOutRequest(queriedBook, authenticatedUser);
 		}
@@ -33,7 +33,7 @@ public abstract class Service {
 	public static final Service RAISE_A_RETURN_REQUEST = new Service() {
 		@Override
 		public void serveIntent(Library library, SystemWrapper systemWrapper) throws UserDoesNotExists {
-			User authenticatedUser = CredentialAuthentication.authenticateUserVia(systemWrapper);
+			User authenticatedUser = SystemController.credentialAuthenticator.authenticateUserVia(systemWrapper);
 			Book bookToBeReturned = getUserQueriedBook(systemWrapper);
 			library.returnBookRequest(bookToBeReturned, authenticatedUser);
 		}

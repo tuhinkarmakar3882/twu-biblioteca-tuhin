@@ -6,7 +6,12 @@ import java.util.HashSet;
 
 import static java.util.Arrays.asList;
 
-public class CredentialAuthentication {
+public class CredentialAuthenticator {
+
+	private User authenticatedUser = null;
+
+	public CredentialAuthenticator() {
+	}
 
 	private static HashSet<User> USER_DATABASE = new HashSet<>(asList(
 			new User("twu-0001", "1234"),
@@ -14,8 +19,12 @@ public class CredentialAuthentication {
 			new User("twu-0003", "4321")
 	));
 
+	public User authenticateUserVia(SystemWrapper systemWrapper) throws UserDoesNotExists {
 
-	public static User authenticateUserVia(SystemWrapper systemWrapper) throws UserDoesNotExists {
+		if (this.authenticatedUser != null) {
+			systemWrapper.getPrintStream().println("Logged in as : " + authenticatedUser);
+			return authenticatedUser;
+		}
 
 		systemWrapper.getPrintStream().println("Library Number : ");
 		String libraryNumber = systemWrapper.takeInput();
@@ -27,7 +36,8 @@ public class CredentialAuthentication {
 
 		if (USER_DATABASE.contains(user)) {
 			systemWrapper.getPrintStream().println("Login Successful!");
-			return user;
+			authenticatedUser = user;
+			return authenticatedUser;
 		}
 		throw new UserDoesNotExists();
 	}
