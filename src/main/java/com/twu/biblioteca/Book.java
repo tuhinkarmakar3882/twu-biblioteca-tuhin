@@ -16,7 +16,7 @@ public class Book {
 
 	public void printDetails(PrintStream out) {
 		out.println(title + "\t" + author + "\t\t" + publicationYear);
-	}
+	} //TODO -> use seperator
 
 	@Override
 	public boolean equals(Object o) {

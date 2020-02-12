@@ -6,12 +6,13 @@ import java.io.PrintStream;
 
 public class SystemController {
 	private Library library;
+	private MoviesLibrary moviesLibrary;
 	private Menu menu;
 	private SystemWrapper systemWrapper;
 	private PrintStream outStream;
 
 
-	SystemController(Menu menu, Library library, PrintStream outStream) {
+	SystemController(Menu menu, Library library, MoviesLibrary moviesLibrary, PrintStream outStream) {
 		this.library = library;
 		this.menu = menu;
 		this.outStream = outStream;

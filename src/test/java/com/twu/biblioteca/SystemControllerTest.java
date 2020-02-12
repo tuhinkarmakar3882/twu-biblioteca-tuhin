@@ -12,14 +12,16 @@ class SystemControllerTest {
 	Menu menu;
 	SystemController systemController;
 	PrintStream mockPrintStream;
+	MoviesLibrary moviesLibrary;
 
 	@BeforeEach
 	void setup() {
 		library = mock(Library.class);
 		menu = mock(Menu.class);
+		moviesLibrary = mock(MoviesLibrary.class);
 		mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		systemController = new SystemController(menu, library, mockPrintStream);
+		systemController = new SystemController(menu, library, moviesLibrary, mockPrintStream);
 	}
 
 	@Test
