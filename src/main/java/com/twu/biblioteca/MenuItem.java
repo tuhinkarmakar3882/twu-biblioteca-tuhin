@@ -15,10 +15,6 @@ public class MenuItem {
 		service.serveIntent(library);
 	}
 
-	public Service getService() {
-		return service;
-	}
-
 	public String getLabel() {
 		return label;
 	}
