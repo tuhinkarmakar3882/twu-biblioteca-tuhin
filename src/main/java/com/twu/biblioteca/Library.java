@@ -24,27 +24,27 @@ public class Library {
 			}
 			return;
 		}
-		Notifications.NO_BOOK_AVAILABLE.showNotificationOn(System.out);
+		Notifications.NO_BOOKS_AVAILABLE.showNotificationOn(System.out);
 	}
 
 	public void checkOutRequest(Book queriedBook) {
 		if (availableBookList.contains(queriedBook)) {
 			librarian.acceptCheckOutRequest(queriedBook);
 			availableBookList.remove(queriedBook);
-			Notifications.CHECK_OUT_SUCCESS.showNotificationOn(printStream);
+			Notifications.BOOK_CHECK_OUT_SUCCESS.showNotificationOn(printStream);
 			return;
 		}
-		Notifications.CHECK_OUT_FAILURE.showNotificationOn(printStream);
+		Notifications.BOOK_CHECK_OUT_FAILURE.showNotificationOn(printStream);
 	}
 
 	public void returnBookRequest(Book bookToBeReturned) {
 		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
 			librarian.acceptReturnRequest(bookToBeReturned);
-			Notifications.RETURN_SUCCESS.showNotificationOn(printStream);
+			Notifications.BOOK_RETURN_SUCCESS.showNotificationOn(printStream);
 			availableBookList.add(bookToBeReturned);
 			return;
 		}
-		Notifications.RETURN_FAILURE.showNotificationOn(printStream);
+		Notifications.BOOK_RETURN_FAILURE.showNotificationOn(printStream);
 	}
 
 	private ArrayList<Book> initializeWithBooks() {

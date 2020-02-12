@@ -25,8 +25,8 @@ public class MenuItem {
 		service.serveIntent(library);
 	}
 
-	public void performAssociatedAction(MoviesLibrary moviesLibrary) {
-		movieService.serveIntent(moviesLibrary);
+	public void performAssociatedAction(MoviesLibrary moviesLibrary, SystemWrapper systemWrapper) {
+		movieService.serveIntent(moviesLibrary, systemWrapper);
 	}
 
 	public String getLabel() {

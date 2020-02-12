@@ -40,6 +40,7 @@ public class Menu {
 		menuList.add(new MenuItem("Check-out a Book", Service.RAISE_A_CHECKOUT_REQUEST));
 		menuList.add(new MenuItem("Return a Book", Service.RAISE_A_RETURN_REQUEST));
 		menuList.add(new MenuItem("List of All Movies", MovieService.DISPLAY_LIST_OF_MOVIES));
+		menuList.add(new MenuItem("Check out a Movie", MovieService.RAISE_A_CHECKOUT_REQUEST));
 	}
 
 	private void createMapOfActions() {

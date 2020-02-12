@@ -19,6 +19,10 @@ public class SystemWrapper {
 		return scanner.nextLine();
 	}
 
+	public int nextInt() {
+		return scanner.nextInt();
+	}
+
 	public void closeSession() {
 		System.exit(0);
 	}

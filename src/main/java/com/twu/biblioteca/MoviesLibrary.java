@@ -1,17 +1,17 @@
 package com.twu.biblioteca;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MoviesLibrary {
-	private List<Movie> availableMovies;
-	private PrintStream outStream;
+	private List<Movie> availableMoviesList, checkedOutMoviesList;
+	private SystemWrapper systemWrapper;
 
-	public MoviesLibrary(PrintStream outStream) {
-		this.availableMovies = initializeWithMovies();
-		this.outStream = outStream;
+	public MoviesLibrary(SystemWrapper systemWrapper) {
+		this.availableMoviesList = initializeWithMovies();
+		checkedOutMoviesList = new ArrayList<>();
+		this.systemWrapper = systemWrapper;
 	}
 
 	private ArrayList<Movie> initializeWithMovies() {
@@ -21,8 +21,28 @@ public class MoviesLibrary {
 	}
 
 	public void showMovies() {
-		for (Movie movie : availableMovies) {
-			movie.printDetails(outStream);
+		if (hasAvailableMovie()) {
+			for (Movie movie : availableMoviesList) {
+				movie.printDetails(systemWrapper.getPrintStream());
+			}
 		}
+		Notifications.NO_MOVIES_AVAILABLE.showNotificationOn(systemWrapper.getPrintStream());
+	}
+
+	private boolean hasAvailableMovie() {
+		return availableMoviesList.size() > 0;
+	}
+
+	public void checkOutRequest(Movie queriedMovie, SystemWrapper systemWrapper) {
+
+		if (availableMoviesList.contains(queriedMovie)) {
+
+			checkedOutMoviesList.add(queriedMovie);
+			availableMoviesList.remove(queriedMovie);
+
+			Notifications.MOVIE_CHECK_OUT_SUCCESS.showNotificationOn(systemWrapper.getPrintStream());
+			return;
+		}
+		Notifications.MOVIE_CHECK_OUT_FAILURE.showNotificationOn(systemWrapper.getPrintStream());
 	}
 }

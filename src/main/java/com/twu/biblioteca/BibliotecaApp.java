@@ -21,6 +21,6 @@ public class BibliotecaApp {
 		menu = new Menu(systemWrapper.getPrintStream());
 		Librarian librarian = new Librarian();
 		library = new Library(librarian, systemWrapper.getPrintStream());
-		moviesLibrary = new MoviesLibrary(systemWrapper.getPrintStream());
+		moviesLibrary = new MoviesLibrary(systemWrapper);
 	}
 }

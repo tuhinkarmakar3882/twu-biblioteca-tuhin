@@ -33,7 +33,7 @@ public class SystemController {
 					break;
 
 				case "MOVIES":
-					chosenMenuItem.performAssociatedAction(moviesLibrary);
+					chosenMenuItem.performAssociatedAction(moviesLibrary, systemWrapper);
 					break;
 			}
 			return;
