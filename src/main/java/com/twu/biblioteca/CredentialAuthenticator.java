@@ -14,9 +14,9 @@ public class CredentialAuthenticator {
 	}
 
 	private static HashSet<User> USER_DATABASE = new HashSet<>(asList(
-			new User("twu-0001", "1234"),
-			new User("twu-0002", "0000"),
-			new User("twu-0003", "4321")
+			new User("twu-0001", "1234", "User One", "abc@gmail.com", "1234567890"),
+			new User("twu-0002", "0000", "User Two", "efg@gmail.com", "0987654321"),
+			new User("twu-0003", "4321", "User Three", "qwerty@werty.com", "1234567876")
 	));
 
 	public User authenticateUserVia(SystemWrapper systemWrapper) throws UserDoesNotExists {
@@ -32,7 +32,7 @@ public class CredentialAuthenticator {
 		systemWrapper.getPrintStream().println("Password : ");
 		String password = systemWrapper.takeInput();
 
-		User user = new User(libraryNumber, password);
+		User user = new User(libraryNumber, password, null, null, null);
 
 		if (USER_DATABASE.contains(user)) {
 			systemWrapper.getPrintStream().println("Login Successful!");

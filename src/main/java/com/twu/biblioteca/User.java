@@ -5,10 +5,16 @@ import java.util.Objects;
 public class User {
 	String libraryNumber;
 	String password;
+	String name;
+	String email;
+	String phoneNumber;
 
-	public User(String libraryNumber, String password) {
+	public User(String libraryNumber, String password, String name, String email, String phoneNumber) {
 		this.libraryNumber = libraryNumber;
 		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
@@ -23,5 +29,10 @@ public class User {
 	@Override
 	public int hashCode() {
 		return Objects.hash(libraryNumber, password);
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }

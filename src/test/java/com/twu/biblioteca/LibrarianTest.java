@@ -80,7 +80,7 @@ public class LibrarianTest {
 		SystemWrapper systemWrapper = new SystemWrapper(System.in, System.out);
 		Library library = new Library(librarian, systemWrapper.getPrintStream());
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
-		User user = new User("123-4567", "1234");
+		User user = new User("123-4567", "1234", null, null, null);
 		HashMap<Book, User> expectedLogBook = new HashMap<>();
 		expectedLogBook.put(bookToBeCheckedOut, user);
 
