@@ -52,7 +52,7 @@ public class SystemController {
 				serveUserRequest();
 			} catch (ExitFromApplicationException exitRequest) {
 				systemWrapper.closeSession();
-			} catch (Exception unhandledExeptions) {
+			} catch (Exception unhandledExceptions) {
 				throw new RuntimeException();
 //				systemWrapper.getPrintStream().println("INVALID CREDENTIALS! USER DOES NOT EXISTS.");
 			}
