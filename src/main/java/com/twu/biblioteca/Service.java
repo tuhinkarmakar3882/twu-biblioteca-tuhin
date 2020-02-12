@@ -14,7 +14,6 @@ public enum Service {
 		@Override
 		public void serveIntent(Library library) throws ExitFromApplicationException {
 			throw new ExitFromApplicationException();
-			//System.exit(0);
 		}
 	},
 	DISPLAY_BOOKS {

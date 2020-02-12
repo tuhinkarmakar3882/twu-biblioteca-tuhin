@@ -7,7 +7,7 @@ import java.io.PrintStream;
 public class SystemController {
 	private Library library;
 	private Menu menu;
-	private InputScanner inputScanner;
+	private SystemWrapper systemWrapper;
 	private PrintStream outStream;
 
 
@@ -15,7 +15,7 @@ public class SystemController {
 		this.library = library;
 		this.menu = menu;
 		this.outStream = outStream;
-		inputScanner = new InputScanner();
+		systemWrapper = new SystemWrapper();
 	}
 
 	public void displayMenu() {
@@ -23,7 +23,7 @@ public class SystemController {
 	}
 
 	public void serveUserRequest() throws ExitFromApplicationException {
-		String option = inputScanner.nextLine();
+		String option = systemWrapper.nextLine();
 		if (menu.isValidOption(option)) {
 			Service requestedService = Service.getRequestedService(option);
 			requestedService.serveIntent(library);
@@ -38,7 +38,7 @@ public class SystemController {
 			try {
 				serveUserRequest();
 			} catch (ExitFromApplicationException exitRequest) {
-				System.exit(0);
+				systemWrapper.closeSession();
 			}
 		}
 	}
