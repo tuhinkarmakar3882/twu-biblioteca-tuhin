@@ -25,8 +25,8 @@ public class SystemController {
 	public void serveUserRequest() throws ExitFromApplicationException {
 		String option = systemWrapper.nextLine();
 		if (menu.isValidOption(option)) {
-			Service requestedService = Service.getRequestedService(option);
-			requestedService.serveIntent(library);
+			MenuItem chosenMenuItem = menu.getMenuItem(option);
+			chosenMenuItem.performAssociatedAction(library);
 		} else {
 			Notifications.INVALID_INPUT.showNotificationOn(outStream);
 		}

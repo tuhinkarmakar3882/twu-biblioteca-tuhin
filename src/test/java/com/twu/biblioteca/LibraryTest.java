@@ -23,7 +23,7 @@ class LibraryTest {
 	}
 
 	@Test
-	public void testShouldNotifyAfterSuccessfulCheckOut() throws NoBookAvailableException {
+	public void testShouldNotifyAfterSuccessfulCheckOut() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Library library = new Library(new Librarian(), mockPrintStream);

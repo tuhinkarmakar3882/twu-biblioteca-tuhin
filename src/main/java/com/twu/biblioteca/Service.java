@@ -1,56 +1,42 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
-import com.twu.biblioteca.Exceptions.NoBookAvailableException;
 
-import java.util.Map;
 import java.util.Scanner;
 
-import static java.util.Map.of;
+public abstract class Service {
 
-public enum Service {
-
-	EXIT_SYSTEM {
+	public static final Service EXIT_SYSTEM = new Service() {
 		@Override
 		public void serveIntent(Library library) throws ExitFromApplicationException {
 			throw new ExitFromApplicationException();
 		}
-	},
-	DISPLAY_BOOKS {
+	};
+
+	public static final Service DISPLAY_BOOKS = new Service() {
 		@Override
 		public void serveIntent(Library library) {
-			try {
-				library.showDetailsOfBooks();
-			} catch (NoBookAvailableException exception) {
-				Notifications.NO_BOOK_AVAILABLE.showNotificationOn(System.out);
-			}
+			library.showDetailsOfBooks();
+
 		}
-	},
-	RAISE_A_CHECKOUT_REQUEST {
+	};
+
+	public static final Service RAISE_A_CHECKOUT_REQUEST = new Service() {
 		@Override
 		public void serveIntent(Library library) {
 			Book queriedBook = getUserQueriedBook();
 			library.checkOutRequest(queriedBook);
 		}
-	},
-	RAISE_A_RETURN_REQUEST {
+	};
+
+
+	public static final Service RAISE_A_RETURN_REQUEST = new Service() {
 		@Override
 		public void serveIntent(Library library) {
 			Book bookToBeReturned = getUserQueriedBook();
 			library.returnBookRequest(bookToBeReturned);
 		}
 	};
-
-
-	public static Service getRequestedService(String option) {
-		Map<String, Service> listOfAllServices = of(
-				"0", EXIT_SYSTEM,
-				"1", DISPLAY_BOOKS,
-				"2", RAISE_A_CHECKOUT_REQUEST,
-				"3", RAISE_A_RETURN_REQUEST
-		);
-		return listOfAllServices.get(option);
-	}
 
 	private static Book getUserQueriedBook() {
 		System.out.println("[+] Book Check out Request");

@@ -6,7 +6,7 @@ public class BibliotecaApp {
 
 		Notifications.WELCOME.showNotificationOn(System.out);
 
-		SystemController coreSystemController = new SystemController(new Menu(), new Library(new Librarian(), System.out), System.out);
+		SystemController coreSystemController = new SystemController(new Menu(System.out), new Library(new Librarian(), System.out), System.out);
 
 		coreSystemController.startSession();
 

@@ -1,7 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.biblioteca.Exceptions.NoBookAvailableException;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +15,7 @@ public class Library {
 		this.printStream = printStream;
 	}
 
-	public void showDetailsOfBooks() throws NoBookAvailableException {
+	public void showDetailsOfBooks() {
 		if (hasBooks()) {
 			System.out.println("\n[+] Listing Down All The Library Books :-");
 			System.out.println("Book Name" + "\t\t" + "Author Name" + "\t\t" + "Publication Year");
@@ -26,7 +24,7 @@ public class Library {
 			}
 			return;
 		}
-		throw new NoBookAvailableException();
+		Notifications.NO_BOOK_AVAILABLE.showNotificationOn(System.out);
 	}
 
 	public void checkOutRequest(Book queriedBook) {
