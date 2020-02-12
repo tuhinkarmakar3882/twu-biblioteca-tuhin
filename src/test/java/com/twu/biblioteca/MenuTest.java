@@ -59,11 +59,4 @@ class MenuTest {
 
 		assertFalse(menu.isValidOption("-1"));
 	}
-
-//	@Test
-//	void testShouldReturnFalseNonIntegerInputs() {
-//		Menu menu = new Menu(mockPrintStream);
-//
-//		assertFalse(menu.isValidOption("THIS_IS_A_WRONG_INPUT"));
-//	}
 }
