@@ -32,9 +32,10 @@ public abstract class Service {
 
 	public static final Service RAISE_A_RETURN_REQUEST = new Service() {
 		@Override
-		public void serveIntent(Library library, SystemWrapper systemWrapper) {
+		public void serveIntent(Library library, SystemWrapper systemWrapper) throws UserDoesNotExists {
+			User authenticatedUser = CredentialAuthentication.authenticateUserVia(systemWrapper);
 			Book bookToBeReturned = getUserQueriedBook(systemWrapper);
-			library.returnBookRequest(bookToBeReturned);
+			library.returnBookRequest(bookToBeReturned, authenticatedUser);
 		}
 	};
 

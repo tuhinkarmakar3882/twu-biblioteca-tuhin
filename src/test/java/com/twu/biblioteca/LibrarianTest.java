@@ -68,7 +68,7 @@ public class LibrarianTest {
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 
-		librarian.acceptReturnRequest(bookToBeCheckedOut);
+		librarian.acceptReturnRequest(bookToBeCheckedOut, null);
 		library.showDetailsOfBooks();
 
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
@@ -81,8 +81,8 @@ public class LibrarianTest {
 		Library library = new Library(librarian, systemWrapper.getPrintStream());
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		User user = new User("123-4567", "1234");
-		HashMap<User, Book> expectedLogBook = new HashMap<>();
-		expectedLogBook.put(user, bookToBeCheckedOut);
+		HashMap<Book, User> expectedLogBook = new HashMap<>();
+		expectedLogBook.put(bookToBeCheckedOut, user);
 
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut, user);
 

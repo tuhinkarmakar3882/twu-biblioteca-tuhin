@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class Librarian {
 	private final HashSet<Book> checkedOutBooks;
-	private HashMap<User, Book> logBookOfCheckOuts;
+	private HashMap<Book, User> logBookOfCheckOuts;
 
 	public Librarian() {
 		this.checkedOutBooks = new HashSet<>();
@@ -14,18 +14,27 @@ public class Librarian {
 
 	public void acceptCheckOutRequest(Book book, User user) {
 		checkedOutBooks.add(book);
-		logBookOfCheckOuts.put(user, book);
+		logBookOfCheckOuts.put(book, user);
 	}
 
 	public boolean hasAvailableForCheckOut(Book book) {
 		return !checkedOutBooks.contains(book);
 	}
 
-	public void acceptReturnRequest(Book book) {
+	public void acceptReturnRequest(Book book, User user) {
 		checkedOutBooks.remove(book);
+		logBookOfCheckOuts.remove(book);
 	}
 
-	public HashMap<User, Book> getLogBookOfCheckOuts() {
+	public HashMap<Book, User> getLogBookOfCheckOuts() {
 		return logBookOfCheckOuts;
+	}
+
+	public boolean hasAvailableForReturn(Book bookToBeReturned, User user) {
+		try {
+			return ((logBookOfCheckOuts.get(bookToBeReturned).equals(user)) && checkedOutBooks.contains(bookToBeReturned));
+		} catch (NullPointerException exception) {
+			return false;
+		}
 	}
 }

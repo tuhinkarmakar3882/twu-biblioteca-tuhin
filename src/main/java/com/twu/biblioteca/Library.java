@@ -37,9 +37,10 @@ public class Library {
 		Notifications.BOOK_CHECK_OUT_FAILURE.showNotificationOn(printStream);
 	}
 
-	public void returnBookRequest(Book bookToBeReturned) {
-		if (!librarian.hasAvailableForCheckOut(bookToBeReturned)) {
-			librarian.acceptReturnRequest(bookToBeReturned);
+	public void returnBookRequest(Book bookToBeReturned, User user) {
+
+		if (librarian.hasAvailableForReturn(bookToBeReturned, user)) {
+			librarian.acceptReturnRequest(bookToBeReturned, user);
 			Notifications.BOOK_RETURN_SUCCESS.showNotificationOn(printStream);
 			availableBookList.add(bookToBeReturned);
 			return;

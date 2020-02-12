@@ -54,7 +54,6 @@ public class SystemController {
 				systemWrapper.closeSession();
 			} catch (Exception unhandledExceptions) {
 				throw new RuntimeException();
-//				systemWrapper.getPrintStream().println("INVALID CREDENTIALS! USER DOES NOT EXISTS.");
 			}
 		}
 	}
