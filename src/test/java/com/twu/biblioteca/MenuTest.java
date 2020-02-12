@@ -59,4 +59,15 @@ class MenuTest {
 
 		assertFalse(menu.isValidOption("-1"));
 	}
+
+	@Test
+	public void testShouldDisplayAnMenuItemForDisplayingAvailableMovies() {
+		Menu menu = new Menu(mockPrintStream);
+		String expectedMenuOption = "4 : List of All Movies";
+
+		menu.showOptions();
+
+		verify(mockPrintStream, times(1)).println(expectedMenuOption);
+
+	}
 }

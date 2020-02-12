@@ -39,6 +39,7 @@ public class Menu {
 		menuList.add(new MenuItem("List of book", Service.DISPLAY_BOOKS));
 		menuList.add(new MenuItem("Check-out a Book", Service.RAISE_A_CHECKOUT_REQUEST));
 		menuList.add(new MenuItem("Return a Book", Service.RAISE_A_RETURN_REQUEST));
+		menuList.add(new MenuItem("List of All Movies", MovieService.DISPLAY_LIST_OF_MOVIES));
 	}
 
 	private void createMapOfActions() {
