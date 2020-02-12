@@ -2,7 +2,7 @@ package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.UserDoesNotExists;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import static java.util.Arrays.asList;
 
@@ -13,7 +13,7 @@ public class CredentialAuthenticator {
 	public CredentialAuthenticator() {
 	}
 
-	private static HashSet<User> USER_DATABASE = new HashSet<>(asList(
+	private static ArrayList<User> USER_DATABASE = new ArrayList<>(asList(
 			new User("twu-0001", "1234", "User One", "abc@gmail.com", "1234567890"),
 			new User("twu-0002", "0000", "User Two", "efg@gmail.com", "0987654321"),
 			new User("twu-0003", "4321", "User Three", "qwerty@werty.com", "1234567876")
@@ -36,7 +36,11 @@ public class CredentialAuthenticator {
 
 		if (USER_DATABASE.contains(user)) {
 			systemWrapper.getPrintStream().println("Login Successful!");
-			authenticatedUser = user;
+			for (User userInDatabase : USER_DATABASE) {
+				if (userInDatabase.equals(user)) {
+					authenticatedUser = userInDatabase;
+				}
+			}
 			return authenticatedUser;
 		}
 		throw new UserDoesNotExists();
