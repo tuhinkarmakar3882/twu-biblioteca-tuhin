@@ -15,12 +15,8 @@ public class SystemWrapper {
 		scanner = new Scanner(inputStream);
 	}
 
-	public String nextLine() {
+	public String takeInput() {
 		return scanner.nextLine();
-	}
-
-	public int nextInt() {
-		return scanner.nextInt();
 	}
 
 	public void closeSession() {

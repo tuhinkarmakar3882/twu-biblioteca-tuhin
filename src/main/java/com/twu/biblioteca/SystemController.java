@@ -1,12 +1,14 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
+import com.twu.biblioteca.Exceptions.UserDoesNotExists;
 
 public class SystemController {
 	private Library library;
 	private MoviesLibrary moviesLibrary;
 	private Menu menu;
 	private SystemWrapper systemWrapper;
+	private User user;
 
 	SystemController(Menu menu, Library library, MoviesLibrary moviesLibrary, SystemWrapper systemWrapper) {
 		this.library = library;
@@ -19,8 +21,8 @@ public class SystemController {
 		menu.showOptions();
 	}
 
-	public void serveUserRequest() throws ExitFromApplicationException {
-		String option = systemWrapper.nextLine();
+	public void serveUserRequest() throws ExitFromApplicationException, UserDoesNotExists {
+		String option = systemWrapper.takeInput();
 
 		if (menu.isValidOption(option)) {
 
@@ -29,7 +31,7 @@ public class SystemController {
 			switch (chosenMenuItem.getTypeOfService()) {
 
 				case "LIBRARY":
-					chosenMenuItem.performAssociatedAction(library);
+					chosenMenuItem.performAssociatedAction(library, systemWrapper);
 					break;
 
 				case "MOVIES":
@@ -50,6 +52,9 @@ public class SystemController {
 				serveUserRequest();
 			} catch (ExitFromApplicationException exitRequest) {
 				systemWrapper.closeSession();
+			} catch (Exception unhandledExeptions) {
+				throw new RuntimeException();
+//				systemWrapper.getPrintStream().println("INVALID CREDENTIALS! USER DOES NOT EXISTS.");
 			}
 		}
 	}

@@ -4,9 +4,9 @@ import com.twu.biblioteca.Exceptions.NoBookAvailableException;
 import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
+import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class LibrarianTest {
@@ -25,7 +25,7 @@ public class LibrarianTest {
 		Librarian librarian = new Librarian();
 		Book bookToBeCheckedOut = new Book("Random Book", "Random Author", 2020);
 
-		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 
 		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
 	}
@@ -38,7 +38,7 @@ public class LibrarianTest {
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
-		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 		library.showDetailsOfBooks();
 
 		assertFalse(librarian.hasAvailableForCheckOut(bookToBeCheckedOut));
@@ -52,7 +52,7 @@ public class LibrarianTest {
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 
-		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 		library.showDetailsOfBooks();
 
 		verify(mockPrintStream, times(0)).println("Harry Potter\tJ K Rowling\t\t2012");
@@ -66,7 +66,7 @@ public class LibrarianTest {
 		System.setOut(mockPrintStream);
 		Library library = new Library(librarian, mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
-		librarian.acceptCheckOutRequest(bookToBeCheckedOut);
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 
 		librarian.acceptReturnRequest(bookToBeCheckedOut);
 		library.showDetailsOfBooks();
@@ -74,4 +74,19 @@ public class LibrarianTest {
 		verify(mockPrintStream, times(1)).println("Harry Potter\tJ K Rowling\t\t2012");
 	}
 
+	@Test
+	void testShouldReturnALogBookOfCheckOutTransactionsDoneByUser() {
+		Librarian librarian = new Librarian();
+		SystemWrapper systemWrapper = new SystemWrapper(System.in, System.out);
+		Library library = new Library(librarian, systemWrapper.getPrintStream());
+		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
+		User user = new User("123-4567", "1234");
+		HashMap<User, Book> expectedLogBook = new HashMap<>();
+		expectedLogBook.put(user, bookToBeCheckedOut);
+
+		librarian.acceptCheckOutRequest(bookToBeCheckedOut, user);
+
+
+		assertEquals(expectedLogBook, librarian.getLogBookOfCheckOuts());
+	}
 }

@@ -27,9 +27,9 @@ public class Library {
 		Notifications.NO_BOOKS_AVAILABLE.showNotificationOn(System.out);
 	}
 
-	public void checkOutRequest(Book queriedBook) {
+	public void checkOutRequest(Book queriedBook, User user) {
 		if (availableBookList.contains(queriedBook)) {
-			librarian.acceptCheckOutRequest(queriedBook);
+			librarian.acceptCheckOutRequest(queriedBook, user);
 			availableBookList.remove(queriedBook);
 			Notifications.BOOK_CHECK_OUT_SUCCESS.showNotificationOn(printStream);
 			return;

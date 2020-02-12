@@ -29,7 +29,7 @@ class LibraryTest {
 		Library library = new Library(new Librarian(), mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
-		library.checkOutRequest(book);
+		library.checkOutRequest(book, mock(User.class));
 
 		library.showDetailsOfBooks();
 		verify(mockPrintStream, times(1)).println("Thank you! Enjoy the book");
@@ -42,9 +42,9 @@ class LibraryTest {
 		System.setOut(mockPrintStream);
 		Library library = new Library(new Librarian(), mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
-		library.checkOutRequest(book);
+		library.checkOutRequest(book, mock(User.class));
 
-		library.checkOutRequest(book);
+		library.checkOutRequest(book, mock(User.class));
 
 		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
 	}
@@ -56,7 +56,7 @@ class LibraryTest {
 		Library library = new Library(new Librarian(), mockPrintStream);
 		Book book = new Book("HOrrI PittAr", "J K Rowling", 2012);
 
-		library.checkOutRequest(book);
+		library.checkOutRequest(book, mock(User.class));
 
 		verify(mockPrintStream, times(1)).println("Sorry, that book is not available");
 	}
@@ -68,7 +68,7 @@ class LibraryTest {
 		Library library = new Library(new Librarian(), mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
-		library.checkOutRequest(book);
+		library.checkOutRequest(book, mock(User.class));
 
 		library.returnBookRequest(book);
 

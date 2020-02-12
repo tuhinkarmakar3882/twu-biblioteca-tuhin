@@ -20,13 +20,13 @@ public abstract class MovieService {
 		System.out.println("[+] Movie Check out Request");
 
 		System.out.println("\t[+] Movie Name : ");
-		String movieName = systemWrapper.nextLine();
+		String movieName = systemWrapper.takeInput();
 		System.out.println("\t[+] Director Name : ");
-		String directorName = systemWrapper.nextLine();
+		String directorName = systemWrapper.takeInput();
 		System.out.println("\t[+] Releasing Year : ");
-		int releasingYear = Integer.parseInt(systemWrapper.nextLine());
+		int releasingYear = Integer.parseInt(systemWrapper.takeInput());
 		System.out.println("\t[+] Rating : ");
-		String movieRating = systemWrapper.nextLine();
+		String movieRating = systemWrapper.takeInput();
 
 		return new Movie(movieName, directorName, releasingYear, movieRating);
 

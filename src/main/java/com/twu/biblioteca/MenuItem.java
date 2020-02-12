@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
+import com.twu.biblioteca.Exceptions.UserDoesNotExists;
 
 public class MenuItem {
 	private String label;
@@ -21,8 +22,8 @@ public class MenuItem {
 		this.typeOfService = "MOVIES";
 	}
 
-	public void performAssociatedAction(Library library) throws ExitFromApplicationException {
-		service.serveIntent(library);
+	public void performAssociatedAction(Library library, SystemWrapper systemWrapper) throws ExitFromApplicationException, UserDoesNotExists {
+		service.serveIntent(library, systemWrapper);
 	}
 
 	public void performAssociatedAction(MoviesLibrary moviesLibrary, SystemWrapper systemWrapper) {
