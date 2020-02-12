@@ -31,10 +31,10 @@ public class Librarian {
 	}
 
 	public boolean hasAvailableForReturn(Book bookToBeReturned, User user) {
-		try {
-			return ((logBookOfCheckOuts.get(bookToBeReturned).equals(user)) && checkedOutBooks.contains(bookToBeReturned));
-		} catch (NullPointerException exception) {
-			return false;
+
+		if (checkedOutBooks.contains(bookToBeReturned)) {
+			return (logBookOfCheckOuts.get(bookToBeReturned).equals(user));
 		}
+		return false;
 	}
 }
