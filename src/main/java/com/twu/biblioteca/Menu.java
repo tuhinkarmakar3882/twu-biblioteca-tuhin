@@ -18,19 +18,6 @@ public class Menu {
 		createMapOfActions();
 	}
 
-	private void addDefaultEntries() {
-		menuList.add(new MenuItem("Exit the Application", Service.EXIT_SYSTEM));
-		menuList.add(new MenuItem("List of book", Service.DISPLAY_BOOKS));
-		menuList.add(new MenuItem("Check-out a Book", Service.RAISE_A_CHECKOUT_REQUEST));
-		menuList.add(new MenuItem("Return a Book", Service.RAISE_A_RETURN_REQUEST));
-	}
-
-	private void createMapOfActions() {
-		for (int itemNumber = 0; itemNumber < menuList.size(); itemNumber++) {
-			menuItemCommandMap.put(itemNumber, menuList.get(itemNumber));
-		}
-	}
-
 	public void showOptions() {
 
 		for (int itemNumber = 0; itemNumber < menuList.size(); itemNumber++) {
@@ -45,5 +32,18 @@ public class Menu {
 
 	public MenuItem getMenuItem(String option) {
 		return menuItemCommandMap.get(Integer.parseInt(option));
+	}
+
+	private void addDefaultEntries() {
+		menuList.add(new MenuItem("Exit the Application", Service.EXIT_SYSTEM));
+		menuList.add(new MenuItem("List of book", Service.DISPLAY_BOOKS));
+		menuList.add(new MenuItem("Check-out a Book", Service.RAISE_A_CHECKOUT_REQUEST));
+		menuList.add(new MenuItem("Return a Book", Service.RAISE_A_RETURN_REQUEST));
+	}
+
+	private void createMapOfActions() {
+		for (int itemNumber = 0; itemNumber < menuList.size(); itemNumber++) {
+			menuItemCommandMap.put(itemNumber, menuList.get(itemNumber));
+		}
 	}
 }

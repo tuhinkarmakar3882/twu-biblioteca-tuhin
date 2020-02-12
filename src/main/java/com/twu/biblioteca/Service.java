@@ -6,6 +6,26 @@ import java.util.Scanner;
 
 public abstract class Service {
 
+	private static Book getUserQueriedBook() {
+		System.out.println("[+] Book Check out Request");
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("\t[+] Book Name : ");
+		String bookName = scanner.nextLine();
+		System.out.println("\t[+] Author Name : ");
+		String authorName = scanner.nextLine();
+		System.out.println("\t[+] Publication Year : ");
+		String publicationYearString = scanner.nextLine();
+
+		try {
+			int publicationYear = Integer.parseInt(publicationYearString); // try to convert the string into Integer
+			return new Book(bookName, authorName, publicationYear);
+		} catch (NumberFormatException invalidNumber) {
+			return new Book(bookName, authorName, -1); //ForceFully Making it an InValid Book
+		}
+
+	}
+
 	public static final Service EXIT_SYSTEM = new Service() {
 		@Override
 		public void serveIntent(Library library) throws ExitFromApplicationException {
@@ -37,26 +57,6 @@ public abstract class Service {
 			library.returnBookRequest(bookToBeReturned);
 		}
 	};
-
-	private static Book getUserQueriedBook() {
-		System.out.println("[+] Book Check out Request");
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("\t[+] Book Name : ");
-		String bookName = scanner.nextLine();
-		System.out.println("\t[+] Author Name : ");
-		String authorName = scanner.nextLine();
-		System.out.println("\t[+] Publication Year : ");
-		String publicationYearString = scanner.nextLine();
-
-		try {
-			int publicationYear = Integer.parseInt(publicationYearString);
-			return new Book(bookName, authorName, publicationYear);
-		} catch (NumberFormatException invalidNumber) {
-			return new Book(bookName, authorName, -1); //ForceFully Making it an InValid Book
-		}
-
-	}
 
 	public abstract void serveIntent(Library library) throws ExitFromApplicationException;
 }
