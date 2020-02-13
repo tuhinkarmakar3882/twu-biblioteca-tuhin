@@ -23,10 +23,6 @@ public class SystemWrapper {
 		System.exit(0);
 	}
 
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-
 	public PrintStream getPrintStream() {
 		return printStream;
 	}

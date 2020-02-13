@@ -51,7 +51,6 @@ public class SystemController {
 	}
 
 	public void startSession() {
-//		int a=0;
 		while (true) {
 			displayMenu();
 			try {

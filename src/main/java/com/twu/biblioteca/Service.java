@@ -39,6 +39,8 @@ public abstract class Service {
 		}
 	};
 
+	public abstract void serveIntent(Library library, SystemWrapper systemWrapper) throws ExitFromApplicationException, UserDoesNotExists;
+
 	private static Book getUserQueriedBook(SystemWrapper systemWrapper) {
 		System.out.println("[+] Book Check out Request");
 
@@ -57,6 +59,4 @@ public abstract class Service {
 		}
 
 	}
-
-	public abstract void serveIntent(Library library, SystemWrapper systemWrapper) throws ExitFromApplicationException, UserDoesNotExists;
 }

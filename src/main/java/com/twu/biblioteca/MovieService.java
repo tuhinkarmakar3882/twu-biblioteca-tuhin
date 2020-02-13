@@ -16,6 +16,8 @@ public abstract class MovieService {
 		}
 	};
 
+	public abstract void serveIntent(MoviesLibrary moviesLibrary, SystemWrapper systemWrapper);
+
 	private static Movie getUserQueriedMovie(SystemWrapper systemWrapper) {
 		System.out.println("[+] Movie Check out Request");
 
@@ -31,7 +33,5 @@ public abstract class MovieService {
 		return new Movie(movieName, directorName, releasingYear, movieRating);
 
 	}
-
-	public abstract void serveIntent(MoviesLibrary moviesLibrary, SystemWrapper systemWrapper);
 
 }

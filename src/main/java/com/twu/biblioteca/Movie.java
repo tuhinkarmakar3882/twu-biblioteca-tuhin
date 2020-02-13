@@ -21,7 +21,6 @@ public class Movie {
 		outStream.println(name + separateWith + directorName + separateWith + year + separateWith + rating);
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

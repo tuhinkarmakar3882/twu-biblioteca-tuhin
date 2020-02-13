@@ -14,12 +14,6 @@ public class MoviesLibrary {
 		this.systemWrapper = systemWrapper;
 	}
 
-	private ArrayList<Movie> initializeWithMovies() {
-		Movie firstMovie = new Movie("Iron Man One", "One Director", 2008, "7");
-		Movie secondMovie = new Movie("Avengers One", "Random Person", 2019, "unrated");
-		return new ArrayList<>(Arrays.asList(firstMovie, secondMovie));
-	}
-
 	public void showMovies() {
 		if (hasAvailableMovie()) {
 			for (Movie movie : availableMoviesList) {
@@ -27,10 +21,6 @@ public class MoviesLibrary {
 			}
 		}
 		Notifications.NO_MOVIES_AVAILABLE.showNotificationOn(systemWrapper.getPrintStream());
-	}
-
-	private boolean hasAvailableMovie() {
-		return availableMoviesList.size() > 0;
 	}
 
 	public void checkOutRequest(Movie queriedMovie, SystemWrapper systemWrapper) {
@@ -44,5 +34,15 @@ public class MoviesLibrary {
 			return;
 		}
 		Notifications.MOVIE_CHECK_OUT_FAILURE.showNotificationOn(systemWrapper.getPrintStream());
+	}
+
+	private ArrayList<Movie> initializeWithMovies() {
+		Movie firstMovie = new Movie("Iron Man One", "One Director", 2008, "7");
+		Movie secondMovie = new Movie("Avengers One", "Random Person", 2019, "unrated");
+		return new ArrayList<>(Arrays.asList(firstMovie, secondMovie));
+	}
+
+	private boolean hasAvailableMovie() {
+		return availableMoviesList.size() > 0;
 	}
 }
