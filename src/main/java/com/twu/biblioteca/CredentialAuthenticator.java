@@ -9,6 +9,7 @@ import static java.util.Arrays.asList;
 public class CredentialAuthenticator {
 
 	private User authenticatedUser = null;
+	private boolean logInStatus = false;
 
 	public CredentialAuthenticator() {
 	}
@@ -41,8 +42,13 @@ public class CredentialAuthenticator {
 					authenticatedUser = userInDatabase;
 				}
 			}
+			logInStatus = true;
 			return authenticatedUser;
 		}
 		throw new UserDoesNotExists();
+	}
+
+	public boolean getAuthStatus() {
+		return logInStatus;
 	}
 }

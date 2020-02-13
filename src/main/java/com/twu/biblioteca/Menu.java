@@ -10,18 +10,39 @@ public class Menu {
 	private List<MenuItem> menuList = new ArrayList<>();
 	private PrintStream outStream;
 	private HashMap<Integer, MenuItem> menuItemCommandMap;
+	private boolean systemControllerIsReady;
 
 	public Menu(PrintStream outStream) {
 		menuItemCommandMap = new HashMap<>();
 		this.outStream = outStream;
+		systemControllerIsReady = false;
 		addDefaultEntries();
-		createMapOfActions();
 	}
 
 	public void showOptions() {
+		if (systemControllerIsReady) {
+			modifyMenuItemsBasedOnLogInStatus();
+		}
+		createMapOfActions();
 
 		for (int itemNumber = 0; itemNumber < menuList.size(); itemNumber++) {
 			outStream.println(itemNumber + " : " + menuList.get(itemNumber).getLabel());
+		}
+		systemControllerIsReady = true;
+	}
+
+	private void modifyMenuItemsBasedOnLogInStatus() {
+		MenuItem userOption = new MenuItem("Show Details", UserService.SHOW_DETAILS);
+
+		if (SystemController.credentialAuthenticator.getAuthStatus()) { //if user is logged in
+			if (!menuList.contains(userOption)) {        // And menu does not already has the user options
+				System.out.println(menuList.contains(userOption));
+				menuList.add(userOption);
+			}
+		} else {
+
+			//At this point user is not logged in
+			menuList.remove(userOption);            // // If, however, menu has the user options, remove it
 		}
 	}
 

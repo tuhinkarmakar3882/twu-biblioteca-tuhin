@@ -39,6 +39,10 @@ public class SystemController {
 				case "MOVIES":
 					chosenMenuItem.performAssociatedAction(moviesLibrary, systemWrapper);
 					break;
+
+				case "USER":
+					chosenMenuItem.performAssociatedAction(credentialAuthenticator.authenticateUserVia(systemWrapper), systemWrapper);
+					break;
 			}
 			return;
 		}
