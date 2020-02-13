@@ -1,35 +1,53 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.Exceptions.ExitFromApplicationException;
-
-import java.io.PrintStream;
+import com.twu.biblioteca.Exceptions.UserDoesNotExists;
 
 public class SystemController {
 	private Library library;
+	private MoviesLibrary moviesLibrary;
 	private Menu menu;
 	private SystemWrapper systemWrapper;
-	private PrintStream outStream;
+	public static CredentialAuthenticator credentialAuthenticator;
 
 
-	SystemController(Menu menu, Library library, PrintStream outStream) {
+	SystemController(Menu menu, Library library, MoviesLibrary moviesLibrary, SystemWrapper systemWrapper) {
 		this.library = library;
 		this.menu = menu;
-		this.outStream = outStream;
-		systemWrapper = new SystemWrapper();
+		this.moviesLibrary = moviesLibrary;
+		this.systemWrapper = systemWrapper;
+		credentialAuthenticator = new CredentialAuthenticator();
 	}
 
 	public void displayMenu() {
 		menu.showOptions();
 	}
 
-	public void serveUserRequest() throws ExitFromApplicationException {
-		String option = systemWrapper.nextLine();
+	public void serveUserRequest() throws ExitFromApplicationException, UserDoesNotExists {
+		String option = systemWrapper.takeInput();
+
 		if (menu.isValidOption(option)) {
+
 			MenuItem chosenMenuItem = menu.getMenuItem(option);
-			chosenMenuItem.performAssociatedAction(library);
-		} else {
-			Notifications.INVALID_INPUT.showNotificationOn(outStream);
+
+			switch (chosenMenuItem.getTypeOfService()) {
+
+				case "LIBRARY":
+					chosenMenuItem.performAssociatedAction(library, systemWrapper);
+					break;
+
+				case "MOVIES":
+					chosenMenuItem.performAssociatedAction(moviesLibrary, systemWrapper);
+					break;
+
+				case "USER":
+					chosenMenuItem.performAssociatedAction(credentialAuthenticator.authenticateUserVia(systemWrapper), systemWrapper);
+					break;
+			}
+			return;
 		}
+
+		Notifications.INVALID_INPUT.showNotificationOn(systemWrapper.getPrintStream());
 	}
 
 	public void startSession() {
@@ -39,6 +57,8 @@ public class SystemController {
 				serveUserRequest();
 			} catch (ExitFromApplicationException exitRequest) {
 				systemWrapper.closeSession();
+			} catch (Exception unhandledExceptions) {
+				throw new RuntimeException();
 			}
 		}
 	}
