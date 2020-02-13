@@ -27,28 +27,40 @@ public class CredentialAuthenticator {
 			return authenticatedUser;
 		}
 
-		systemWrapper.getPrintStream().println("Library Number : ");
-		String libraryNumber = systemWrapper.takeInput();
 
-		systemWrapper.getPrintStream().println("Password : ");
-		String password = systemWrapper.takeInput();
-
-		User user = new User(libraryNumber, password, null, null, null);
+		User user = getUserCredentials(systemWrapper);
 
 		if (USER_DATABASE.contains(user)) {
-			systemWrapper.getPrintStream().println("Login Successful!");
-			for (User userInDatabase : USER_DATABASE) {
-				if (userInDatabase.equals(user)) {
-					authenticatedUser = userInDatabase;
-				}
-			}
-			logInStatus = true;
+			Notifications.LOGIN_SUCCESSFUL.showNotificationOn(systemWrapper.getPrintStream());
+
+			authenticatedUser = loadMatchingUserDetails(user);
+
 			return authenticatedUser;
 		}
+
 		throw new UserDoesNotExists();
 	}
 
 	public boolean getAuthStatus() {
 		return logInStatus;
+	}
+
+	private User loadMatchingUserDetails(User user) {
+		for (User userInDatabase : USER_DATABASE) {
+			if (userInDatabase.equals(user)) {
+				logInStatus = true;
+				return userInDatabase;
+			}
+		}
+		return null;
+	}
+
+	private User getUserCredentials(SystemWrapper systemWrapper) {
+		systemWrapper.getPrintStream().println("Library Number : ");
+		String libraryNumber = systemWrapper.takeInput();
+
+		systemWrapper.getPrintStream().println("Password : ");
+		String password = systemWrapper.takeInput();
+		return new User(libraryNumber, password, null, null, null);
 	}
 }

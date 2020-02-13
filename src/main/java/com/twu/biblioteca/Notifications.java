@@ -12,7 +12,10 @@ public enum Notifications {
 	NO_BOOKS_AVAILABLE("No Books are Available in Library Now!"),
 	NO_MOVIES_AVAILABLE("No Movies are Available Now!"),
 	MOVIE_CHECK_OUT_SUCCESS("Thank you! Enjoy the movie"),
-	MOVIE_CHECK_OUT_FAILURE("Sorry, that movie is not available");
+	MOVIE_CHECK_OUT_FAILURE("Sorry, that movie is not available"),
+	LOGIN_SUCCESSFUL("Log in Successful!");
+
+
 	String message;
 
 	Notifications(String message) {

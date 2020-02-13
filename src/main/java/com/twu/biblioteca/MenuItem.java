@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public class MenuItem {
 	private String label;
-	private Service service;
-	private MovieService movieService;
-	private UserService userService;
+	private Service service = null;
+	private MovieService movieService = null;
+	private UserService userService = null;
 	private String typeOfService;
 
 
@@ -56,8 +56,11 @@ public class MenuItem {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		MenuItem menuItem = (MenuItem) o;
-		return label.equals(menuItem.label) &&
-				typeOfService.equals(menuItem.typeOfService);
+		return Objects.equals(label, menuItem.label) &&
+				Objects.equals(service, menuItem.service) &&
+				Objects.equals(movieService, menuItem.movieService) &&
+				Objects.equals(userService, menuItem.userService) &&
+				Objects.equals(typeOfService, menuItem.typeOfService);
 	}
 
 	@Override
