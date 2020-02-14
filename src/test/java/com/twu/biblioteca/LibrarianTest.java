@@ -33,7 +33,7 @@ public class LibrarianTest {
 	@Test
 	void testShouldMoveABookToCheckedOutBookList() throws NoBookAvailableException {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian, System.out);
+		Library library = new Library(System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
@@ -47,7 +47,7 @@ public class LibrarianTest {
 	@Test
 	void testShouldNotShowAnAlreadyCheckedOutBookInAvailableBookList() throws NoBookAvailableException {
 		Librarian librarian = new Librarian();
-		Library library = new Library(librarian, System.out);
+		Library library = new Library(System.out);
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
@@ -64,7 +64,7 @@ public class LibrarianTest {
 		Librarian librarian = new Librarian();
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(librarian, mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		librarian.acceptCheckOutRequest(bookToBeCheckedOut, mock(User.class));
 
@@ -78,7 +78,7 @@ public class LibrarianTest {
 	void testShouldReturnALogBookOfCheckOutTransactionsDoneByUser() {
 		Librarian librarian = new Librarian();
 		SystemWrapper systemWrapper = new SystemWrapper(System.in, System.out);
-		Library library = new Library(librarian, systemWrapper.getPrintStream());
+		Library library = new Library(systemWrapper.getPrintStream());
 		Book bookToBeCheckedOut = new Book("Harry Potter", "J K Rowling", 2012);
 		User user = new User("123-4567", "1234", null, null, null);
 		HashMap<Book, User> expectedLogBook = new HashMap<>();

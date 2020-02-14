@@ -13,7 +13,7 @@ class LibraryTest {
 	public void testShouldPrintDetailsOfTheLibraryBooks() throws NoBookAvailableException {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 
 		library.showDetailsOfBooks();
 
@@ -26,7 +26,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterSuccessfulCheckOut() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 
 		library.checkOutRequest(book, mock(User.class));
@@ -40,7 +40,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheBookIsUnavailable() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 		library.checkOutRequest(book, mock(User.class));
 
@@ -53,7 +53,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedCheckOutIfTheSpellingIsWrong() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book book = new Book("HOrrI PittAr", "J K Rowling", 2012);
 
 		library.checkOutRequest(book, mock(User.class));
@@ -65,7 +65,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterSuccessfulReturn() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 		User user = mock(User.class);
 		library.checkOutRequest(book, user);
@@ -79,7 +79,7 @@ class LibraryTest {
 	public void testShouldNotifyAfterFailedBookReturnDueToSpellingError() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		User user = mock(User.class);
 		Book correctBook = new Book("Harry Potter", "J K Rowling", 2012);
 		library.checkOutRequest(correctBook, user);
@@ -96,7 +96,7 @@ class LibraryTest {
 	public void testShouldAllowValidUserToReturnItsBook() {
 		PrintStream mockPrintStream = mock(PrintStream.class);
 		System.setOut(mockPrintStream);
-		Library library = new Library(new Librarian(), mockPrintStream);
+		Library library = new Library(mockPrintStream);
 		Book book = new Book("Harry Potter", "J K Rowling", 2012);
 		User userOne = mock(User.class);
 		library.checkOutRequest(book, userOne);

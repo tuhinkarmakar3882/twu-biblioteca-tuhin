@@ -3,14 +3,17 @@ package com.twu.biblioteca;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Library {
 	private final ArrayList<Book> availableBookList;
-	private final Librarian librarian;
+	//	private final Librarian librarian;
+	private HashMap<Book, User> logBookOfCheckOuts;
 	private PrintStream printStream;
 
-	public Library(Librarian librarian, PrintStream printStream) {
-		this.librarian = librarian;
+	public Library(PrintStream printStream) {
+//		this.librarian = librarian;
+		logBookOfCheckOuts = new HashMap<>();
 		this.availableBookList = initializeWithBooks();
 		this.printStream = printStream;
 	}
@@ -29,7 +32,7 @@ public class Library {
 
 	public void checkOutRequest(Book queriedBook, User user) {
 		if (availableBookList.contains(queriedBook)) {
-			librarian.acceptCheckOutRequest(queriedBook, user);
+			logBookOfCheckOuts.put(queriedBook, user);
 			availableBookList.remove(queriedBook);
 			Notifications.BOOK_CHECK_OUT_SUCCESS.showNotificationOn(printStream);
 			return;
@@ -39,8 +42,9 @@ public class Library {
 
 	public void returnBookRequest(Book bookToBeReturned, User user) {
 
-		if (librarian.hasAvailableForReturn(bookToBeReturned, user)) {
-			librarian.acceptReturnRequest(bookToBeReturned, user);
+		if (isAValidReturn(bookToBeReturned, user)) {
+			logBookOfCheckOuts.remove(bookToBeReturned);
+			availableBookList.add(bookToBeReturned);
 			Notifications.BOOK_RETURN_SUCCESS.showNotificationOn(printStream);
 			availableBookList.add(bookToBeReturned);
 			return;
@@ -56,5 +60,13 @@ public class Library {
 
 	private boolean hasBooks() {
 		return availableBookList.size() > 0;
+	}
+
+	private boolean isAValidReturn(Book bookToBeReturned, User user) {
+
+		if (logBookOfCheckOuts.containsKey(bookToBeReturned)) {
+			return (logBookOfCheckOuts.get(bookToBeReturned).equals(user));
+		}
+		return false;
 	}
 }

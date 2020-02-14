@@ -20,7 +20,7 @@ public class BibliotecaApp {
 		systemWrapper = new SystemWrapper(System.in, System.out);
 		menu = new Menu(systemWrapper.getPrintStream());
 		Librarian librarian = new Librarian();
-		library = new Library(librarian, systemWrapper.getPrintStream());
+		library = new Library(systemWrapper.getPrintStream());
 		moviesLibrary = new MoviesLibrary(systemWrapper);
 	}
 }
