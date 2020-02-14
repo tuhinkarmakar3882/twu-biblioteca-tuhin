@@ -54,7 +54,7 @@ class MenuTest {
 	}
 
 	@Test
-	void testShouldReturnFalseForValidInputs() {
+	void testShouldReturnFalseForInValidInputs() {
 		Menu menu = new Menu(mockPrintStream);
 
 		assertFalse(menu.isValidOption("-1"));

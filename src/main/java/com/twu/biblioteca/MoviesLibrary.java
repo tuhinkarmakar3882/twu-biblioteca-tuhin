@@ -19,6 +19,7 @@ public class MoviesLibrary {
 			for (Movie movie : availableMoviesList) {
 				movie.printDetails(systemWrapper.getPrintStream());
 			}
+			return;
 		}
 		Notifications.NO_MOVIES_AVAILABLE.showNotificationOn(systemWrapper.getPrintStream());
 	}

@@ -19,6 +19,7 @@ class CredentialAuthenticatorTest {
 		System.setIn(testInput);
 		SystemWrapper systemWrapper = new SystemWrapper(testInput, printStream);
 		CredentialAuthenticator credentialAuthenticator = new CredentialAuthenticator();
+
 		assertDoesNotThrow(() -> credentialAuthenticator.authenticateUserVia(systemWrapper));
 	}
 
@@ -29,6 +30,7 @@ class CredentialAuthenticatorTest {
 		System.setIn(testInput);
 		SystemWrapper systemWrapper = new SystemWrapper(testInput, printStream);
 		CredentialAuthenticator credentialAuthenticator = new CredentialAuthenticator();
+
 		assertThrows(UserDoesNotExists.class, () -> credentialAuthenticator.authenticateUserVia(systemWrapper));
 	}
 }
